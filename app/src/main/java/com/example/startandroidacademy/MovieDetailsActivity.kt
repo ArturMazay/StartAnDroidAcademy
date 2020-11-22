@@ -15,6 +15,7 @@ class MovieDetailsActivity : AppCompatActivity() {
             add(Actor("Robert Downey12", R.drawable.actor4))
             add(Actor("Robert Downey31", R.drawable.actor1))
             add(Actor("Robert Downeye1", R.drawable.actor3))
+            add(Actor("Robert Downeye1", R.drawable.actor2))
 
         }
 

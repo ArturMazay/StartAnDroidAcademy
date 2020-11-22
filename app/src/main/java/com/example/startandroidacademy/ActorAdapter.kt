@@ -8,6 +8,7 @@ class ActorAdapter (private val listActor : List<Actor>):RecyclerView.Adapter<Ac
 
 
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorViewHolder =
          ActorViewHolder(itemView = LayoutInflater.from(parent.context)
                 .inflate(R.layout.actor_item, parent, false))
