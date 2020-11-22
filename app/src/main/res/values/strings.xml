@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">StartAnDroidAcademy</string>
-    <string name="back_text_btn">Back</string>
+    <string name="back_text_btn"> Back</string>
     <string name="title_activity_movie_details">Movie details</string>
     <string name="name_actor1">Robert Downey Jr.</string>
     <string name="name_actor2">Chris Evans</string>

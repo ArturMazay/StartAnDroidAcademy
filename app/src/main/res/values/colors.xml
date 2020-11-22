@@ -10,7 +10,7 @@
 
     <color name="background_dark">#191926</color>
     <color name="background_dark_opacity">#80191926</color>
-
+    <color name="text_secondary">#6D6D80</color>
     <color name="rating_star_red">#FF3365</color>
     <color name="rating_star_empty">#6D6D80</color>
     <color name="text_light">#ECECEC</color>
