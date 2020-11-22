@@ -16,12 +16,10 @@
             android:layout_height="@dimen/height_background_image"
             android:scaleType="centerCrop"
             android:src="@drawable/orig"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:id="@+id/view"
@@ -148,13 +146,11 @@
             android:layout_height="@dimen/height_story"
             android:layout_marginHorizontal="@dimen/margin_normal"
             android:layout_marginTop="@dimen/margin_extra_small"
-            android:layout_marginBottom="182dp"
             android:fontFamily="@font/roboto_light"
             android:gravity="center_vertical"
             android:text="@string/text_storyline"
             android:textColor="@color/white"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_storyline_title" />
@@ -165,15 +161,13 @@
             android:layout_height="@dimen/height_textline_large"
             android:layout_marginHorizontal="@dimen/margin_normal"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:layout_marginBottom="134dp"
+            android:layout_marginTop="4dp"
             android:fontFamily="@font/roboto_black"
             android:gravity="center_horizontal"
             android:letterSpacing="-0.017"
             android:text="@string/title_cast"
             android:textColor="@color/text_light_gray"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_storyline" />
 
@@ -184,9 +178,9 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:drawablePadding="8dp"
             android:background="@android:color/transparent"
             android:drawableStart="@drawable/ic_path"
+            android:drawablePadding="8dp"
             android:gravity="center_vertical"
             android:lineSpacingExtra="4sp"
             android:text="@string/back_text_btn"
@@ -196,119 +190,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/iv_actor1"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_actor"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/margin_normal"
-            android:layout_marginTop="@dimen/margin_tiny_plus"
-            android:scaleType="centerCrop"
-            android:src="@drawable/actor1"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@+id/iv_actor2"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_cast" />
-
-        <ImageView
-            android:id="@+id/iv_actor2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginTop="@dimen/margin_tiny_plus"
-            android:scaleType="centerCrop"
-            android:src="@drawable/actor2"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@id/iv_actor3"
-            app:layout_constraintStart_toEndOf="@id/iv_actor1"
-            app:layout_constraintTop_toBottomOf="@id/tv_cast" />
-
-        <ImageView
-            android:id="@+id/iv_actor3"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginTop="@dimen/margin_tiny_plus"
-            android:scaleType="centerCrop"
-            android:src="@drawable/actor3"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@id/iv_actor4"
-            app:layout_constraintStart_toEndOf="@id/iv_actor2"
-            app:layout_constraintTop_toBottomOf="@id/tv_cast" />
-
-        <ImageView
-            android:id="@+id/iv_actor4"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginTop="@dimen/margin_tiny_plus"
-            android:layout_marginEnd="@dimen/margin_normal"
-            android:scaleType="centerCrop"
-            android:src="@drawable/actor4"
-            app:layout_constraintDimensionRatio="1:1"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_actor3"
-            app:layout_constraintTop_toBottomOf="@id/tv_cast" />
-
-        <TextView
-            android:id="@+id/tv_actor_name1"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/height_textline_extra_large"
-            android:layout_marginTop="@dimen/margin_tiny"
-            android:height="@dimen/height_textline_small"
-            android:fontFamily="@font/roboto_black"
-            android:gravity="center_horizontal|start"
-            android:text="@string/name_actor1"
-            android:textColor="@color/text_white"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@id/iv_actor1"
-            app:layout_constraintStart_toStartOf="@id/iv_actor1"
-            app:layout_constraintTop_toBottomOf="@+id/iv_actor1" />
-
-        <TextView
-            android:id="@+id/tv_actor_name2"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/height_textline_extra_large"
-            android:layout_marginTop="@dimen/margin_tiny"
-            android:height="@dimen/height_textline_small"
-            android:fontFamily="@font/roboto_black"
-            android:gravity="center_horizontal|start"
-            android:text="@string/name_actor2"
-            android:textColor="@color/text_white"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@id/iv_actor2"
-            app:layout_constraintStart_toStartOf="@id/iv_actor2"
-            app:layout_constraintTop_toBottomOf="@+id/iv_actor2" />
-
-        <TextView
-            android:id="@+id/tv_actor_name3"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/height_textline_extra_large"
-            android:layout_marginTop="@dimen/margin_tiny"
-            android:height="@dimen/height_textline_small"
-            android:fontFamily="@font/roboto_black"
-            android:gravity="center_horizontal|start"
-            android:text="@string/name_actor3"
-            android:textColor="@color/text_white"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@id/iv_actor3"
-            app:layout_constraintStart_toStartOf="@id/iv_actor3"
-            app:layout_constraintTop_toBottomOf="@+id/iv_actor3" />
-
-        <TextView
-            android:id="@+id/tv_actor_name4"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/height_textline_extra_large"
-            android:layout_marginTop="@dimen/margin_tiny"
-            android:height="@dimen/height_textline_small"
-            android:fontFamily="@font/roboto_black"
-            android:gravity="center_horizontal|start"
-            android:text="@string/name_actor4"
-            android:textColor="@color/text_white"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@id/iv_actor4"
-            app:layout_constraintStart_toStartOf="@id/iv_actor4"
-            app:layout_constraintTop_toBottomOf="@+id/iv_actor4" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cast" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

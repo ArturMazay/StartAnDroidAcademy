@@ -18,5 +18,6 @@
     <color name="text_red">#FF3466</color>
     <color name="text_light_gray">#C4C4C4</color>
     <color name="text_white">#D8D8D8</color>
+    <color name="text_color_actor">#D8D8D8</color>
 
 </resources>
