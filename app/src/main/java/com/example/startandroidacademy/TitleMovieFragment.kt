@@ -19,29 +19,17 @@ class TitleMovieFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater?.inflate(R.layout.fragment_title_movie, container, false)
+        val view = inflater.inflate(R.layout.fragment_title_movie, container, false)
         /* val button:Button=view.findViewById(R.id.button_open)
          button.setOnClickListener {
              onClickListenerToMovieDetails?.onClickOpenDetailsMovieFragment()
              //Log.e("XXX",("WORK GOOD").toString())
          }*/
 
-        val listMovie = mutableListOf<Movie>().apply {
-            add(Movie("Robert Downey12", R.drawable.moviepng))
-            Log.e("XXX", "WORK GOOD")
-        }
-
-        val adapterMovie = MovieAdapter(listMovie = listMovie)
-        Log.e("XXX", "WORK GOOD1")
-        val rv: RecyclerView? = rootView.findViewById(R.id.rv_movie)
-        Log.e("XXX", "WORK GOOD2")
-        rv?.adapter = adapterMovie
-        Log.e("XXX", "WORK GOOD3")
-
-        return rootView
+        return view
     }
 
-    /* override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
          super.onViewCreated(view, savedInstanceState)
 
          val listMovie = mutableListOf<Movie>().apply {
@@ -50,15 +38,15 @@ class TitleMovieFragment : Fragment() {
          }
 
          val adapterMovie = MovieAdapter(listMovie=listMovie)
-         Log.e("XXX","WORK GOOD1")
+
          val rv: RecyclerView? = view.findViewById(R.id.rv_movie)
-         Log.e("XXX","WORK GOOD2")
+         Log.e("XXX",(rv==null).toString())
          rv?.adapter = adapterMovie
-         Log.e("XXX","WORK GOOD3")
+
 
 
      }
- */
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         onClickListenerToMovieDetails = context as? OnClickListenerToMovieDetails
