@@ -19,14 +19,14 @@ class TitleMovieFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_title_movie, container, false)
+
         /* val button:Button=view.findViewById(R.id.button_open)
          button.setOnClickListener {
              onClickListenerToMovieDetails?.onClickOpenDetailsMovieFragment()
              //Log.e("XXX",("WORK GOOD").toString())
          }*/
 
-        return view
+        return inflater.inflate(R.layout.fragment_title_movie, container, false)
     }
 
      override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
