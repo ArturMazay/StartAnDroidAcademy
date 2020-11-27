@@ -3,8 +3,7 @@ package com.example.startandroidacademy
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : AppCompatActivity(),OnClickListenerToMovieDetails {
-
+class MainActivity : AppCompatActivity(), OnClickListenerToMovieDetails {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -14,10 +13,10 @@ class MainActivity : AppCompatActivity(),OnClickListenerToMovieDetails {
             .add(R.id.main_container, TitleMovieFragment())
             .commit()
     }
-//не работает
+
     override fun onClickOpenDetailsMovieFragment() {
-       supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container,DetailsMovieFragment())
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, DetailsMovieFragment())
             .commit()
     }
 }

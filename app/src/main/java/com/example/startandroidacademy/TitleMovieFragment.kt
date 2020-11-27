@@ -19,11 +19,11 @@ class TitleMovieFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_title_movie, container, false)
-        val button:Button=view.findViewById(R.id.button_open)
+       /* val button:Button=view.findViewById(R.id.button_open)
         button.setOnClickListener {
             onClickListenerToMovieDetails?.onClickOpenDetailsMovieFragment()
             //Log.e("XXX",("WORK GOOD").toString())
-        }
+        }*/
 
 
         return view
@@ -38,8 +38,8 @@ class TitleMovieFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         onClickListenerToMovieDetails = null
+        //Log.e("XXX",(onClickListenerToMovieDetails==null).toString())
     }
-
     companion object {
 
     }
