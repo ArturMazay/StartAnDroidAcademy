@@ -29,23 +29,26 @@ class TitleMovieFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_title_movie, container, false)
     }
 
-     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-         super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-         val listMovie = mutableListOf<Movie>().apply {
-             add(Movie("Robert Downey12", R.drawable.moviepng))
-             Log.e("XXX","WORK GOOD")
-         }
+        val listMovie = mutableListOf<Movie>().apply {
+            add(Movie("Robert Downey12", R.drawable.moviepng))
+            add(Movie("Robert Downey12", R.drawable.moviepng))
+            add(Movie("Robert Downey12", R.drawable.moviepng))
+            add(Movie("Robert Downey12", R.drawable.moviepng))
+            add(Movie("Robert Downey12", R.drawable.moviepng))
 
-         val adapterMovie = MovieAdapter(listMovie=listMovie)
+        }
 
-         val rv: RecyclerView? = view.findViewById(R.id.rv_movie)
-         Log.e("XXX",(rv==null).toString())
-         rv?.adapter = adapterMovie
+        val adapterMovie = MovieAdapter(listMovie = listMovie)
+
+        val rv: RecyclerView? = view.findViewById(R.id.rv_movie)
+        Log.e("XXX", (rv == null).toString())
+        rv?.adapter = adapterMovie
 
 
-
-     }
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -59,7 +62,13 @@ class TitleMovieFragment : Fragment() {
         //Log.e("XXX",(onClickListenerToMovieDetails==null).toString())
     }
 
-    companion object {
-
+    override fun onDestroyView() {
+        super.onDestroyView()
     }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = TitleMovieFragment()
+    }
+
 }
