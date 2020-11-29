@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class TitleMovieFragment : Fragment() {
 
-   // private var onClickListenerToMovieDetails: OnClickListenerToMovieDetails? = null
+    private var onClickListenerToMovieDetails: OnClickListenerToMovieDetails? = null
 
 
     override fun onCreateView(
@@ -41,14 +41,15 @@ class TitleMovieFragment : Fragment() {
 
         }
 
-        val adapterMovie = MovieAdapter(listMovie = listMovie,object:OnClickListenerToMovieDetails{
-            override fun onClickOpenDetailsMovieFragment(position: Movie) {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_container, DetailsMovieFragment())
-                    .addToBackStack(null)
-                    .commit()
+        val adapterMovie = MovieAdapter(
+            listMovie = listMovie,
+            onClickListenerToMovieDetails = object
+                : OnClickListenerToMovieDetails {
+                override fun onClickOpenDetailsMovieFragment(movie: Movie) {
+                    onClickListenerToMovieDetails?.onClickOpenDetailsMovieFragment(movie)
+                }
             }
-        })
+        )
 
         val rv: RecyclerView? = view.findViewById(R.id.rv_movie)
         Log.e("XXX", (rv == null).toString())
@@ -57,7 +58,7 @@ class TitleMovieFragment : Fragment() {
 
     }
 
-    /*override fun onAttach(context: Context) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         onClickListenerToMovieDetails = context as? OnClickListenerToMovieDetails
         // Log.e("XXX",(onClickListenerToMovieDetails==null).toString())
@@ -66,16 +67,11 @@ class TitleMovieFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         onClickListenerToMovieDetails = null
-        //Log.e("XXX",(onClickListenerToMovieDetails==null).toString())
-    }*/
-
-    override fun onDestroyView() {
-        super.onDestroyView()
     }
 
     companion object {
         @JvmStatic
         fun newInstance() = TitleMovieFragment()
+        }
     }
 
-}
