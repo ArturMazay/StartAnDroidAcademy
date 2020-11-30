@@ -9,14 +9,18 @@ class MainActivity : AppCompatActivity(), OnClickListenerToMovieDetails {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.beginTransaction()
-            .add(R.id.main_container, TitleMovieFragment())
-            .commit()
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.main_container, TitleMovieFragment())
+                .commit()
+        }
+
     }
 
     override fun onClickOpenDetailsMovieFragment() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_container, DetailsMovieFragment())
+            .addToBackStack(null)
             .commit()
     }
 }
