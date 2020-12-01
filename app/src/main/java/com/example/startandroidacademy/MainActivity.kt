@@ -16,10 +16,6 @@ class MainActivity : AppCompatActivity(), OnClickListenerToMovieDetails {
         }
     }
 
-    override fun onBackPressed() {
-        supportFragmentManager.popBackStack()
-    }
-
     override fun onClickOpenDetailsMovieFragment(movie: Movie) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_container, DetailsMovieFragment.newInstance(movie))

@@ -20,12 +20,6 @@ class TitleMovieFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        /* val button:Button=view.findViewById(R.id.button_open)
-         button.setOnClickListener {
-             onClickListenerToMovieDetails?.onClickOpenDetailsMovieFragment()
-             //Log.e("XXX",("WORK GOOD").toString())
-         }*/
-
         return inflater.inflate(R.layout.fragment_title_movie, container, false)
     }
 
@@ -55,13 +49,12 @@ class TitleMovieFragment : Fragment() {
         Log.e("XXX", (rv == null).toString())
         rv?.adapter = adapterMovie
 
-
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         onClickListenerToMovieDetails = context as? OnClickListenerToMovieDetails
-        // Log.e("XXX",(onClickListenerToMovieDetails==null).toString())
+
     }
 
     override fun onDetach() {
@@ -72,6 +65,6 @@ class TitleMovieFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = TitleMovieFragment()
-        }
     }
+}
 
