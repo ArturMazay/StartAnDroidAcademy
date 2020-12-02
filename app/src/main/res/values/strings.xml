@@ -17,8 +17,7 @@
     <string name="movie_name">Avengers:\nEnd Game</string>
     <string name="movie_tag">Action, Adventure, Fantasy</string>
     <string name="movie_review">125 Reviews</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="movies_list">Movies list</string>
+    <string name="like">like</string>
 
 </resources>

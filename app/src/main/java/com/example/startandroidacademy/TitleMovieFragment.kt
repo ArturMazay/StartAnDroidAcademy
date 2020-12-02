@@ -24,16 +24,26 @@ class TitleMovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val view: View? = view?.findViewById(R.id.inCard)
-        view?.setOnClickListener {
-            onClickListenerToMovieDetails?.onClickOpenDetailsMovieFragment()
-        }
+      
+        val adapterMovie = MovieAdapter(
+            listMovie = listMovie,
+            onClickListenerToMovieDetails = object
+                : OnClickListenerToMovieDetails {
+                override fun onClickOpenDetailsMovieFragment(movie: Movie) {
+                    onClickListenerToMovieDetails?.onClickOpenDetailsMovieFragment(movie)
+                }
+            }
+        )
+
+        val rv: RecyclerView? = view.findViewById(R.id.rv_movie)
+        rv?.adapter = adapterMovie
 
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         onClickListenerToMovieDetails = context as? OnClickListenerToMovieDetails
+
     }
 
     override fun onDetach() {
@@ -47,4 +57,5 @@ class TitleMovieFragment : Fragment() {
 
         }
     }
+}
 

@@ -1,100 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
-    card_view:cardBackgroundColor="@color/black"
-    card_view:cardCornerRadius="4dp"
-    card_view:cardElevation="4dp"
-    card_view:contentPadding="2dp">
-
+    android:layout_margin="@dimen/half_margin_bad"
+    android:background="@drawable/gradient_bg_dark"
+    card_view:cardBackgroundColor="@color/card_background"
+    card_view:cardCornerRadius="@dimen/card_radius"
+    card_view:cardElevation="@dimen/card_elevation"
+    card_view:contentPadding="@dimen/card_padding">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/image_view_list_movie"
-            android:layout_width="0dp"
-            android:layout_height="248dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:src="@drawable/moviepng"
+            card_view:layout_constraintBottom_toTopOf="@+id/tv_movie_list"
+            card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:id="@+id/image_gradient"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:src="@drawable/gradient_bg_dark"
-            card_view:layout_constraintBottom_toTopOf="@+id/name"
+            card_view:layout_constraintBottom_toTopOf="@+id/tv_movie_list"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tag_movie_list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="214dp"
-            android:lineHeight="12dp"
+            android:paddingStart="@dimen/very_small_margin"
             android:text="@string/movie_tag"
             android:textColor="@color/text_red"
-            android:textSize="8sp"
-            android:textStyle="normal"
+            android:textSize="@dimen/text_secondary"
+            card_view:layout_constraintBottom_toTopOf="@+id/rating"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="0"
-            card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="@+id/image_view_list_movie" />
+            card_view:layout_constraintStart_toStartOf="parent" />
 
         <RatingBar
             android:id="@+id/rating"
             style="?android:attr/ratingBarStyleSmall"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="228dp"
-            android:background="@color/blackBG"
-            android:backgroundTint="@color/black"
+            android:layout_marginStart="@dimen/very_small_margin"
             android:isIndicator="true"
             android:numStars="5"
-            android:progressTint="@color/text_red"
+            android:progressTint="@color/rating_star_red"
             android:rating="4"
             android:stepSize="0.1"
+            card_view:layout_constraintBottom_toBottomOf="@+id/image_view_list_movie"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent" />
+             />
 
         <TextView
             android:id="@+id/reviews"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="228dp"
+            android:layout_marginStart="@dimen/half_margin_medium"
             android:textColor="@color/text_secondary"
-            android:textSize="8sp"
-            card_view:layout_constraintStart_toEndOf="@+id/rating"
-            card_view:layout_constraintTop_toTopOf="@+id/image_view_list_movie"
+            android:textSize="@dimen/text_secondary"
+            card_view:layout_constraintBottom_toBottomOf="@+id/image_view_list_movie"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintStart_toEndOf="@id/rating"
             tools:text="12 Reviews" />
 
         <TextView
-            android:id="@+id/name"
-            android:layout_width="0dp"
+            android:id="@+id/tv_movie_list"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="@dimen/very_small_margin"
             android:text="@string/movie_name"
-            android:textColor="@color/text_white"
-            android:textSize="14sp"
-            card_view:layout_constraintBottom_toTopOf="@+id/time"
+            android:textColor="@color/text_light"
+            android:textSize="@dimen/text_primary"
+            card_view:layout_constraintBottom_toTopOf="@+id/time_text"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/image_view_list_movie"
-            tools:text="Avengers" />
+            card_view:layout_constraintTop_toBottomOf="@+id/image_view_list_movie" />
 
         <TextView
+            android:id="@+id/time_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/very_small_margin"
+            android:text="120 min"
+            android:textColor="@color/text_time"
+            android:textSize="@dimen/text_secondary"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_movie_list" />
+
+
+        <TextView
+            android:id="@+id/age_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
             android:id="@+id/time"
             android:layout_width="0dp"
             android:layout_marginStart="6dp"
@@ -114,23 +133,23 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/rectangle2"
             android:gravity="center"
-            android:text="@string/age"
-            android:textColor="@color/text_white"
+            android:text="13+"
+            android:textColor="@color/text_light"
+            android:textStyle="normal"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/lake"
-            android:layout_width="0dp"
+            android:id="@+id/like"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="144dp"
-            android:layout_marginTop="13dp"
-            android:layout_marginEnd="6dp"
+            android:contentDescription="@string/like"
+            android:paddingStart="@dimen/margin_like"
+            android:paddingTop="@dimen/margin_like"
+            android:paddingEnd="@dimen/margin_like"
+            android:paddingBottom="@dimen/margin_like"
             android:src="@drawable/ic_favorite_white_18dp"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.cardview.widget.CardView>
