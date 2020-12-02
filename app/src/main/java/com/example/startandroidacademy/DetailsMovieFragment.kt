@@ -15,7 +15,6 @@ class DetailsMovieFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         return inflater.inflate(R.layout.fragment_details_movie, container, false)
     }
 
@@ -37,13 +36,16 @@ class DetailsMovieFragment : Fragment() {
         }
 
         val adapterActor = ActorAdapter(listActor = listActor)
-        val recyclerView: RecyclerView = view.findViewById(R.id.list_actor)
-        recyclerView.adapter = adapterActor
+        val recyclerView: RecyclerView? = view?.findViewById(R.id.list_actor)
+        recyclerView?.adapter = adapterActor
 
+        return inflater.inflate(R.layout.fragment_details_movie, container, false)
     }
+
 
     companion object {
         @JvmStatic
         fun newInstance() = DetailsMovieFragment()
+
     }
 }

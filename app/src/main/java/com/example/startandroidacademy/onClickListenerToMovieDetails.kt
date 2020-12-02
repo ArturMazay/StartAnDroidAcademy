@@ -1,5 +1,5 @@
 package com.example.startandroidacademy
 
 interface OnClickListenerToMovieDetails {
-    fun onClickOpenDetailsMovieFragment()
+    fun onClickOpenDetailsMovieFragment(movie: Movie)
 }

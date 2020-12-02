@@ -105,8 +105,7 @@
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/name"
             tools:text="120 MIN" />
-
-
+      
         <TextView
             android:id="@+id/text_view_movie_list"
             android:layout_width="0dp"
