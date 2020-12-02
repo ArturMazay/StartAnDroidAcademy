@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 
@@ -20,6 +21,7 @@ class DetailsMovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         val viewBack: Button = view.findViewById(R.id.button_back)
         viewBack.setOnClickListener {
@@ -37,18 +39,18 @@ class DetailsMovieFragment : Fragment() {
         val recyclerView: RecyclerView? = view?.findViewById(R.id.list_actor)
         recyclerView?.adapter = adapterActor
 
+
         val movie = requireArguments().getParcelable<Movie>(MOVIE_KEY)!!  //надо разобраться
 
     }
 
-    companion object {
-        const val MOVIE_KEY = "keymovie"
+        return inflater.inflate(R.layout.fragment_details_movie, container, false)
+    }
 
+
+    companion object {
         @JvmStatic
-        fun newInstance(movie: Movie) = DetailsMovieFragment().apply {
-            arguments = Bundle().apply {
-                putParcelable(MOVIE_KEY, movie)
-            }
-        }
+        fun newInstance() = DetailsMovieFragment()
+
     }
 }
