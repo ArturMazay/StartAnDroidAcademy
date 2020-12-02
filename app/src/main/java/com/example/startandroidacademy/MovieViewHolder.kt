@@ -5,14 +5,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.bumptech.glide.Glide
 
 class MovieViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
 
-    private val titleMovie: ImageView = itemView.findViewById(R.id.image_view_list_movie)
-    private val movieName: TextView = itemView.findViewById(R.id.name)
+    private val titleImageMovie: ImageView = itemView.findViewById(R.id.image_view_list_movie)
+    private val movieName: TextView = itemView.findViewById(R.id.tv_movie_list)
 
     fun bindMovie(movie: Movie) {
-        titleMovie.setImageResource(R.drawable.actor1)  //Вот
+        titleImageMovie.setImageResource(R.drawable.moviepng)
         movieName.text = movie.titleMovie
     }
 

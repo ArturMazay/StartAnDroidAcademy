@@ -57,7 +57,7 @@
             android:layout_marginStart="@dimen/margin_normal"
             android:layout_marginTop="@dimen/margin_top_age"
             android:alpha="0.9"
-            android:background="@drawable/shape_rectangle_with_circle_corners"
+            android:background="@drawable/rectangle2"
             android:fontFamily="@font/roboto_black"
             android:gravity="center"
             android:text="@string/age"
