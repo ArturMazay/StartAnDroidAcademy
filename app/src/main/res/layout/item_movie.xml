@@ -25,7 +25,7 @@
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <View
-            android:id="@+id/imageViewMask"
+            android:id="@+id/image_gradient"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:adjustViewBounds="true"
@@ -37,7 +37,7 @@
 
         <TextView
             android:id="@+id/tag_movie_list"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:layout_marginTop="214dp"
@@ -70,8 +70,8 @@
 
         <TextView
             android:id="@+id/reviews"
-            android:layout_width="53dp"
-            android:layout_height="12dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:layout_marginTop="228dp"
             android:textColor="@color/text_secondary"
@@ -97,21 +97,19 @@
         <TextView
             android:id="@+id/time"
             android:layout_width="0dp"
+            android:layout_marginStart="6dp"
             android:layout_height="wrap_content"
             android:textColor="@color/text_white"
             android:textSize="8sp"
             android:textStyle="normal"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/name"
             tools:text="120 MIN" />
-
-
+      
         <TextView
             android:id="@+id/text_view_movie_list"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/rectangle2"
@@ -122,6 +120,7 @@
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/lake"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="144dp"

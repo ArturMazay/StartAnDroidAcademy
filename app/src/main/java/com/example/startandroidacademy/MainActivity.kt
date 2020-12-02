@@ -11,21 +11,17 @@ class MainActivity : AppCompatActivity(), OnClickListenerToMovieDetails {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .add(R.id.main_container, TitleMovieFragment.newInstance())
+            .add(R.id.main_container, TitleMovieFragment.newInstance())
                 .commit()
         }
     }
 
-    override fun onBackPressed() {
-        supportFragmentManager.popBackStack()
-    }
 
     override fun onClickOpenDetailsMovieFragment(movie: Movie) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, DetailsMovieFragment.newInstance(movie))
+        supportFragmentManager.beginTransaction() 
+            .replace(R.id.main_container, DetailsMovieFragment.newInstance())
             .addToBackStack(null)
             .commit()
-
     }
 
 }
