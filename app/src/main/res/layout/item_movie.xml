@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    card_view:cardBackgroundColor="@color/black"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="4dp"
+    card_view:contentPadding="2dp">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/image_view_list_movie"
+            android:layout_width="0dp"
+            android:layout_height="248dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/moviepng"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/imageViewMask"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/gradient_bg_dark"
+            card_view:layout_constraintBottom_toTopOf="@+id/name"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tag_movie_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="214dp"
+            android:lineHeight="12dp"
+            android:text="@string/movie_tag"
+            android:textColor="@color/text_red"
+            android:textSize="8sp"
+            android:textStyle="normal"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="@+id/image_view_list_movie" />
+
+        <RatingBar
+            android:id="@+id/rating"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="228dp"
+            android:background="@color/blackBG"
+            android:backgroundTint="@color/black"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:progressTint="@color/text_red"
+            android:rating="4"
+            android:stepSize="0.1"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/reviews"
+            android:layout_width="53dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="228dp"
+            android:textColor="@color/text_secondary"
+            android:textSize="8sp"
+            card_view:layout_constraintStart_toEndOf="@+id/rating"
+            card_view:layout_constraintTop_toTopOf="@+id/image_view_list_movie"
+            tools:text="12 Reviews" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/movie_name"
+            android:textColor="@color/text_white"
+            android:textSize="14sp"
+            card_view:layout_constraintBottom_toTopOf="@+id/time"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/image_view_list_movie"
+            tools:text="Avengers" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_white"
+            android:textSize="8sp"
+            android:textStyle="normal"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/name"
+            tools:text="120 MIN" />
+
+
+        <TextView
+            android:id="@+id/text_view_movie_list"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rectangle2"
+            android:gravity="center"
+            android:text="@string/age"
+            android:textColor="@color/text_white"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="144dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/ic_favorite_white_18dp"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
