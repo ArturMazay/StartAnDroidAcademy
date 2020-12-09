@@ -3,6 +3,7 @@ package com.example.startandroidacademy
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.startandroidacademy.data.Movie
 
 class MovieAdapter(
     private val listMovie: List<Movie>,

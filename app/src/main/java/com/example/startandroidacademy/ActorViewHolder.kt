@@ -5,6 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.startandroidacademy.data.Actor
 
 class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

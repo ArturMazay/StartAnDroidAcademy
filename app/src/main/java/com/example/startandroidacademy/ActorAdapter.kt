@@ -3,6 +3,7 @@ package com.example.startandroidacademy
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.startandroidacademy.data.Actor
 
 class ActorAdapter (private val listActor : List<Actor>):RecyclerView.Adapter<ActorViewHolder> (){
 

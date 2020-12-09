@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.startandroidacademy.data.Actor
+import com.example.startandroidacademy.data.Movie
 
 
 class DetailsMovieFragment : Fragment() {

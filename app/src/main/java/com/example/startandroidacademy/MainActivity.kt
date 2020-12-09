@@ -2,6 +2,7 @@ package com.example.startandroidacademy
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.startandroidacademy.data.Movie
 
 class MainActivity : AppCompatActivity(), OnClickListenerToMovieDetails {
 
