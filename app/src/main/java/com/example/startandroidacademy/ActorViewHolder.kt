@@ -10,11 +10,11 @@ import com.example.startandroidacademy.data.Actor
 
 class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    private val actorImageImageView: ImageView = itemView.findViewById(R.id.image_view_actor)
+    private val actorImageImageView: ImageView = itemView.findViewById(R.id.actor_poster)
     private val actorNameTextView: TextView = itemView.findViewById(R.id.name_actor)
 
     fun bind(actor: Actor) {
-        Glide.with(itemView.context).load(actor.picture)
+        Glide.with(itemView.context).load(actor.picture).into(actorImageImageView)
         actorNameTextView.text = actor.name
     }
 

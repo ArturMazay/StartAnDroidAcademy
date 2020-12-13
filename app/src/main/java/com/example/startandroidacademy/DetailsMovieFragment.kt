@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.startandroidacademy.data.Actor
 import com.example.startandroidacademy.data.Movie
 
@@ -33,9 +36,13 @@ class DetailsMovieFragment : Fragment() {
         val recyclerView: RecyclerView? = view.findViewById(R.id.list_actor)
         recyclerView?.adapter = adapterActor
 
+        val tvName:TextView = view.findViewById(R.id.tv_name)
+        val ivBackgraund:ImageView = view.findViewById(R.id.iv_background)
         val movie = requireArguments().getParcelable<Movie>(MOVIE_KEY)!!
-         movie.run {
 
+         movie.run {
+              Glide.with(view.context).load(movie.poster).into(ivBackgraund)
+             tvName.text = title
          }//надо разобраться
 
     }

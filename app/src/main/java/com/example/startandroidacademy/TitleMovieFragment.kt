@@ -46,13 +46,7 @@ class TitleMovieFragment : Fragment() {
         updateData()
     }
 
-    override fun onDestroyView() {
-        coroutineSupervisorScope.cancel()
-        super.onDestroyView()
-
-    }
-
-    private fun createSuperScope() = CoroutineScope(Dispatchers.IO + SupervisorJob())
+    private fun createSuperScope() = CoroutineScope(Dispatchers.IO)
 
     private fun updateData() {
         coroutineSupervisorScope.launch(superExceptionHandler) {
