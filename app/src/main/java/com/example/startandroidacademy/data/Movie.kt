@@ -10,13 +10,13 @@ data class Movie(
     val overview: String?,
     val poster: String?,
     val backdrop: String?,
-    val ratings: Float,
-    val numberOfRatings: Int,
-    val minimumAge: Int,
+    var ratings: Float,
+    var numberOfRatings: Int,
+    var minimumAge: Int?,
     val runtime: Int,
     val genres: List<Genre>,
     val actors: List<Actor>
-):Parcelable{
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString(),
@@ -25,11 +25,29 @@ data class Movie(
         parcel.readString(),
         parcel.readFloat(),
         parcel.readInt(),
-        parcel.readInt(),
+        parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readInt(),
         TODO("genres"),
         TODO("actors")
-    )
+    ) {
+    }
+
+    fun getReview(): String {
+        return "100 Reviews"
+    }
+
+    fun getRuntime(): String {
+        return "$runtime min"
+    }
+
+
+    fun getRating(): Float {
+        return if (ratings <= 0) 0F else ratings / 2
+    }
+
+    fun getTag(): String {
+        return genres.joinToString(separator = ", ", transform = { genreItem -> genreItem.name })
+    }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
@@ -39,7 +57,7 @@ data class Movie(
         parcel.writeString(backdrop)
         parcel.writeFloat(ratings)
         parcel.writeInt(numberOfRatings)
-        parcel.writeInt(minimumAge)
+        parcel.writeValue(minimumAge)
         parcel.writeInt(runtime)
     }
 
@@ -56,4 +74,6 @@ data class Movie(
             return arrayOfNulls(size)
         }
     }
+
+
 }

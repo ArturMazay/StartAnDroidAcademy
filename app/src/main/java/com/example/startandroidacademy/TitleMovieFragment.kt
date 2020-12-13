@@ -9,12 +9,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.startandroidacademy.data.Movie
+import com.example.startandroidacademy.data.loadMovies
+import kotlinx.coroutines.*
 
 
 class TitleMovieFragment : Fragment() {
 
     private var onClickListenerToMovieDetails: OnClickListenerToMovieDetails? = null
 
+    private var coroutineSupervisorScope = createSuperScope()
+    private lateinit var adapter : MovieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,17 +31,7 @@ class TitleMovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val listMovie = mutableListOf<Movie>().apply {
-            add(Movie("Robert Downey12", R.drawable.moviepng))
-            add(Movie("Robert Downey12", R.drawable.moviepng))
-            add(Movie("Robert Downey12", R.drawable.moviepng))
-            add(Movie("Robert Downey12", R.drawable.moviepng))
-            add(Movie("Robert Downey12", R.drawable.moviepng))
-
-        }
-
-        val adapterMovie = MovieAdapter(
-            listMovie = listMovie,
+        adapter = MovieAdapter(
             onClickListenerToMovieDetails = object
                 : OnClickListenerToMovieDetails {
                 override fun onClickOpenDetailsMovieFragment(movie: Movie) {
@@ -46,11 +40,37 @@ class TitleMovieFragment : Fragment() {
             }
         )
 
+
         val rv: RecyclerView? = view.findViewById(R.id.rv_movie)
-        Log.e("XXX", (rv == null).toString())
-        rv?.adapter = adapterMovie
+        rv?.adapter = adapter
+        updateData()
+    }
+
+    override fun onDestroyView() {
+        coroutineSupervisorScope.cancel()
+        super.onDestroyView()
 
     }
+
+    private fun createSuperScope() = CoroutineScope(Dispatchers.IO + SupervisorJob())
+
+    private fun updateData() {
+        coroutineSupervisorScope.launch(superExceptionHandler) {
+            adapter.bindMovies(loadMovies(requireContext()))
+            withContext(Dispatchers.Main) { adapter.notifyDataSetChanged() }
+        }
+    }
+    private val superExceptionHandler = CoroutineExceptionHandler { canceledContext, exception ->
+        Log.e("TAG", "SuperExceptionHandler [canceledContext:$canceledContext]")
+        coroutineSupervisorScope.launch {
+            logExceptionSuspend("superExceptionHandler", exception)
+        }
+    }
+
+    private suspend fun logExceptionSuspend(who: String, throwable: Throwable) = withContext(Dispatchers.Main) {
+        Log.e("TAG", "$who::Failed", throwable)
+    }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -63,9 +83,13 @@ class TitleMovieFragment : Fragment() {
         onClickListenerToMovieDetails = null
     }
 
+
+
+
     companion object {
         @JvmStatic
         fun newInstance() = TitleMovieFragment()
     }
 }
+
 

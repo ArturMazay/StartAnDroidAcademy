@@ -41,7 +41,7 @@
 
         <TextView
             android:id="@+id/tag_movie_list"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/very_small_margin"
             android:text="@string/movie_tag"
@@ -64,8 +64,7 @@
             android:rating="4"
             android:stepSize="0.1"
             card_view:layout_constraintBottom_toBottomOf="@+id/image_view_list_movie"
-            card_view:layout_constraintStart_toStartOf="parent"
-             />
+            card_view:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/reviews"
@@ -81,7 +80,7 @@
             tools:text="12 Reviews" />
 
         <TextView
-            android:id="@+id/tv_movie_list"
+            android:id="@+id/tv_movie_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/very_small_margin"
@@ -105,7 +104,7 @@
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/tv_movie_list" />
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_movie_name" />
 
 
         <TextView

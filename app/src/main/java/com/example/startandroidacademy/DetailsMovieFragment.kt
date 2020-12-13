@@ -29,14 +29,12 @@ class DetailsMovieFragment : Fragment() {
         }
 
         val listActor = mutableListOf<Actor>().apply {
-            add(Actor("Robert Downey12", R.drawable.actor4))
-            add(Actor("Robert Downey31", R.drawable.actor1))
-            add(Actor("Robert Downeye1", R.drawable.actor3))
-            add(Actor("Robert Downeye1", R.drawable.actor2))
+            add(Actor(1,"Robert Downey12", "m,"))
+
         }
 
         val adapterActor = ActorAdapter(listActor = listActor)
-        val recyclerView: RecyclerView? = view?.findViewById(R.id.list_actor)
+        val recyclerView: RecyclerView? = view.findViewById(R.id.list_actor)
         recyclerView?.adapter = adapterActor
 
         val movie = requireArguments().getParcelable<Movie>(MOVIE_KEY)!!  //надо разобраться
