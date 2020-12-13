@@ -28,16 +28,15 @@ class DetailsMovieFragment : Fragment() {
             requireActivity().onBackPressed()
         }
 
-        val listActor = mutableListOf<Actor>().apply {
-            add(Actor(1,"Robert Downey12", "m,"))
 
-        }
-
-        val adapterActor = ActorAdapter(listActor = listActor)
+        val adapterActor = ActorAdapter()
         val recyclerView: RecyclerView? = view.findViewById(R.id.list_actor)
         recyclerView?.adapter = adapterActor
 
-        val movie = requireArguments().getParcelable<Movie>(MOVIE_KEY)!!  //надо разобраться
+        val movie = requireArguments().getParcelable<Movie>(MOVIE_KEY)!!
+         movie.run {
+
+         }//надо разобраться
 
     }
 

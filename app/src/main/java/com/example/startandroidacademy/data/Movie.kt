@@ -3,7 +3,6 @@ package com.example.startandroidacademy.data
 import android.os.Parcel
 import android.os.Parcelable
 
-
 data class Movie(
     val id: Int,
     val title: String?,

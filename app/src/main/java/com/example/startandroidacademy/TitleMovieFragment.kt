@@ -18,7 +18,7 @@ class TitleMovieFragment : Fragment() {
     private var onClickListenerToMovieDetails: OnClickListenerToMovieDetails? = null
 
     private var coroutineSupervisorScope = createSuperScope()
-    private lateinit var adapter : MovieAdapter
+    private lateinit var adapter: MovieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,6 +60,7 @@ class TitleMovieFragment : Fragment() {
             withContext(Dispatchers.Main) { adapter.notifyDataSetChanged() }
         }
     }
+
     private val superExceptionHandler = CoroutineExceptionHandler { canceledContext, exception ->
         Log.e("TAG", "SuperExceptionHandler [canceledContext:$canceledContext]")
         coroutineSupervisorScope.launch {
@@ -67,9 +68,10 @@ class TitleMovieFragment : Fragment() {
         }
     }
 
-    private suspend fun logExceptionSuspend(who: String, throwable: Throwable) = withContext(Dispatchers.Main) {
-        Log.e("TAG", "$who::Failed", throwable)
-    }
+    private suspend fun logExceptionSuspend(who: String, throwable: Throwable) =
+        withContext(Dispatchers.Main) {
+            Log.e("TAG", "$who::Failed", throwable)
+        }
 
 
     override fun onAttach(context: Context) {
@@ -82,8 +84,6 @@ class TitleMovieFragment : Fragment() {
         super.onDetach()
         onClickListenerToMovieDetails = null
     }
-
-
 
 
     companion object {
