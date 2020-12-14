@@ -32,7 +32,7 @@ data class Movie(
     }
 
     fun getReview(): String {
-        return "100 Reviews"
+        return "$ Reviews"   //не чего поэтому поводу не нашел в лодере хз дге их брать
     }
 
     fun getRuntime(): String {
@@ -41,7 +41,7 @@ data class Movie(
 
 
     fun getRating(): Float {
-        return if (ratings <= 0) 0F else ratings / 2
+        return if (ratings <= 0) 0F else ratings / 5
     }
 
     fun getTag(): String {
@@ -63,6 +63,11 @@ data class Movie(
     override fun describeContents(): Int {
         return 0
     }
+
+  /*  fun getMinimumAge(): String {
+        val adult:Boolean?=false
+        return if (adult<18) "18+" else "13+"  // не пойму как ему возраст установить
+    }*/
 
     companion object CREATOR : Parcelable.Creator<Movie> {
         override fun createFromParcel(parcel: Parcel): Movie {
