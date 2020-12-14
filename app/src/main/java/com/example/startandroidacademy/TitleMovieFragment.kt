@@ -2,7 +2,6 @@ package com.example.startandroidacademy
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +9,16 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.startandroidacademy.data.Movie
 import com.example.startandroidacademy.data.loadMovies
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class TitleMovieFragment : Fragment() {
 
     private var onClickListenerToMovieDetails: OnClickListenerToMovieDetails? = null
-
-    private var coroutineSupervisorScope = createSuperScope()
+    private fun createSuperScope() = CoroutineScope(Dispatchers.IO)
     private lateinit var adapter: MovieAdapter
 
     override fun onCreateView(
@@ -46,27 +47,12 @@ class TitleMovieFragment : Fragment() {
         updateData()
     }
 
-    private fun createSuperScope() = CoroutineScope(Dispatchers.IO)
-
     private fun updateData() {
-        coroutineSupervisorScope.async(){
+        createSuperScope().launch {
             adapter.bindMovies(loadMovies(requireContext()))
             withContext(Dispatchers.Main) { adapter.notifyDataSetChanged() }
         }
     }
-
-   /* private val superExceptionHandler = CoroutineExceptionHandler { canceledContext, exception ->
-        Log.e("TAG", "SuperExceptionHandler [canceledContext:$canceledContext]")
-        coroutineSupervisorScope.launch {
-            logExceptionSuspend("superExceptionHandler", exception)
-        }
-    }
-*/
-  /*  private suspend fun logExceptionSuspend(who: String, throwable: Throwable) =
-        withContext(Dispatchers.Main) {
-            Log.e("TAG", "$who::Failed", throwable)
-        }
-*/
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
