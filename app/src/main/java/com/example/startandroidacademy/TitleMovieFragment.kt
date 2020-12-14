@@ -49,24 +49,24 @@ class TitleMovieFragment : Fragment() {
     private fun createSuperScope() = CoroutineScope(Dispatchers.IO)
 
     private fun updateData() {
-        coroutineSupervisorScope.launch(superExceptionHandler) {
+        coroutineSupervisorScope.async(){
             adapter.bindMovies(loadMovies(requireContext()))
             withContext(Dispatchers.Main) { adapter.notifyDataSetChanged() }
         }
     }
 
-    private val superExceptionHandler = CoroutineExceptionHandler { canceledContext, exception ->
+   /* private val superExceptionHandler = CoroutineExceptionHandler { canceledContext, exception ->
         Log.e("TAG", "SuperExceptionHandler [canceledContext:$canceledContext]")
         coroutineSupervisorScope.launch {
             logExceptionSuspend("superExceptionHandler", exception)
         }
     }
-
-    private suspend fun logExceptionSuspend(who: String, throwable: Throwable) =
+*/
+  /*  private suspend fun logExceptionSuspend(who: String, throwable: Throwable) =
         withContext(Dispatchers.Main) {
             Log.e("TAG", "$who::Failed", throwable)
         }
-
+*/
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
