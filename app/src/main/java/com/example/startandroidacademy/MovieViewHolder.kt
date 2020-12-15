@@ -22,7 +22,7 @@ class MovieViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
         Glide.with(itemView.context).load(movie.poster).into(poster)
         tvName.text = movie.title
         ratingBar.rating = movie.getRating()
-        //tvAge.text = movie.getMinimumAge()
+        tvAge.text = movie.getMinimumAge().toString()+ "+"//
         tvTime.text = movie.getRuntime()
         reviews.text = movie.getReview()
         tag.text = movie.getTag()

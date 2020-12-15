@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity(), OnClickListenerToMovieDetails {
             .replace(R.id.main_container, DetailsMovieFragment.newInstance(movie))
             .addToBackStack(null)
             .commit()
-
     }
+
 
 }

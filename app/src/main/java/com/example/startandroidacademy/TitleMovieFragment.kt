@@ -19,7 +19,7 @@ class TitleMovieFragment : Fragment() {
 
     private var onClickListenerToMovieDetails: OnClickListenerToMovieDetails? = null
     private fun createSuperScope() = CoroutineScope(Dispatchers.IO)
-    private lateinit var adapter: MovieAdapter
+     private lateinit var adapter: MovieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +49,7 @@ class TitleMovieFragment : Fragment() {
 
     private fun updateData() {
         createSuperScope().launch {
-            adapter.bindMovies(loadMovies(requireContext()))
+            adapter.bindMovies(loadMovies(this@TitleMovieFragment.requireContext()))
             withContext(Dispatchers.Main) { adapter.notifyDataSetChanged() }
         }
     }

@@ -4,10 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.startandroidacademy.data.Actor
+import com.example.startandroidacademy.data.Movie
 
 class ActorAdapter ():RecyclerView.Adapter<ActorViewHolder> (){
 
     private var listActor: List<Actor> = listOf()
+
+    fun bindActor(newActor: List<Actor>){
+        listActor=newActor
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorViewHolder =
@@ -20,10 +25,5 @@ class ActorAdapter ():RecyclerView.Adapter<ActorViewHolder> (){
     }
 
     override fun getItemCount(): Int= listActor.size
-
-
-    private fun bindActor(newActor: List<Actor>){
-        listActor=newActor
-    }
 
 }
