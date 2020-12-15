@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.example.startandroidacademy.data.Actor
 import com.example.startandroidacademy.data.Movie
 import com.example.startandroidacademy.data.loadMovies
+import com.example.startandroidacademy.data.parseActors
 import kotlinx.coroutines.*
 
 
@@ -55,8 +56,8 @@ class DetailsMovieFragment : Fragment() {
 
     private fun updateData() {
         coroutineScoop().async {
-            adapter.bindActor(loadMovies(this@DetailsMovieFragment.requireContext()))
-            withContext(Dispatchers.u) { adapter.notifyDataSetChanged() }
+            adapter.bindActor(parseActors(requireContext()))
+            withContext(Dispatchers.Main) { adapter.notifyDataSetChanged() }
         }
     }
 
