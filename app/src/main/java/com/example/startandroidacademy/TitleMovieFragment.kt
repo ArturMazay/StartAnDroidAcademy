@@ -18,9 +18,10 @@ import kotlinx.coroutines.withContext
 class TitleMovieFragment : Fragment() {
 
     private var onClickListenerToMovieDetails: OnClickListenerToMovieDetails? = null
+
     private fun createSuperScope() = CoroutineScope(Dispatchers.IO)
      private lateinit var adapter: MovieAdapter
-
+  
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,7 +29,7 @@ class TitleMovieFragment : Fragment() {
 
         return inflater.inflate(R.layout.fragment_title_movie, container, false)
     }
-
+  
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -40,7 +41,6 @@ class TitleMovieFragment : Fragment() {
                 }
             }
         )
-
 
         val rv: RecyclerView? = view.findViewById(R.id.rv_movie)
         rv?.adapter = adapter
@@ -69,6 +69,8 @@ class TitleMovieFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = TitleMovieFragment()
+
+        }
     }
 }
 

@@ -32,6 +32,7 @@ class DetailsMovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         val viewBack: Button = view.findViewById(R.id.button_back)
         viewBack.setOnClickListener {
             requireActivity().onBackPressed()
@@ -46,7 +47,7 @@ class DetailsMovieFragment : Fragment() {
         val tvName: TextView = view.findViewById(R.id.tv_name)
         val ivBackgraund: ImageView = view.findViewById(R.id.iv_background)
         val movie = requireArguments().getParcelable<Movie>(MOVIE_KEY)!!
-
+     
         movie.run {
             Glide.with(view.context).load(movie.poster).into(ivBackgraund)
             tvName.text = title
@@ -61,14 +62,13 @@ class DetailsMovieFragment : Fragment() {
         }
     }
 
-    companion object {
-        const val MOVIE_KEY = "keymovie"
+        return inflater.inflate(R.layout.fragment_details_movie, container, false)
+    }
 
+
+    companion object {
         @JvmStatic
-        fun newInstance(movie: Movie) = DetailsMovieFragment().apply {
-            arguments = Bundle().apply {
-                putParcelable(MOVIE_KEY, movie)
-            }
-        }
+        fun newInstance() = DetailsMovieFragment()
+
     }
 }
