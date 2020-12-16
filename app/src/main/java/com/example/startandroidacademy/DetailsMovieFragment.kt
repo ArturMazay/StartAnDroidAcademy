@@ -5,12 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.startandroidacademy.data.Actor
+import com.example.startandroidacademy.data.Movie
+import com.example.startandroidacademy.data.loadMovies
+import com.example.startandroidacademy.data.parseActors
+import kotlinx.coroutines.*
 
 
 class DetailsMovieFragment : Fragment() {
+
+    private fun coroutineScoop() = CoroutineScope(Dispatchers.IO)
+    private lateinit var adapter: ActorAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,22 +36,30 @@ class DetailsMovieFragment : Fragment() {
         val viewBack: Button = view.findViewById(R.id.button_back)
         viewBack.setOnClickListener {
             requireActivity().onBackPressed()
+
         }
 
-        val listActor = mutableListOf<Actor>().apply {
-            add(Actor("Robert Downey12", R.drawable.actor4))
-            add(Actor("Robert Downey31", R.drawable.actor1))
-            add(Actor("Robert Downeye1", R.drawable.actor3))
-            add(Actor("Robert Downeye1", R.drawable.actor2))
-        }
 
-        val adapterActor = ActorAdapter(listActor = listActor)
-        val recyclerView: RecyclerView? = view?.findViewById(R.id.list_actor)
+        val adapterActor = ActorAdapter()
+        val recyclerView: RecyclerView? = view.findViewById(R.id.list_actor)
         recyclerView?.adapter = adapterActor
 
+        val tvName: TextView = view.findViewById(R.id.tv_name)
+        val ivBackgraund: ImageView = view.findViewById(R.id.iv_background)
+        val movie = requireArguments().getParcelable<Movie>(MOVIE_KEY)!!
+     
+        movie.run {
+            Glide.with(view.context).load(movie.poster).into(ivBackgraund)
+            tvName.text = title
+            updateData()
+        }
+    }
 
-        val movie = requireArguments().getParcelable<Movie>(MOVIE_KEY)!!  //надо разобраться
-
+    private fun updateData() {
+        coroutineScoop().async {
+            adapter.bindActor(parseActors(requireContext()))
+            withContext(Dispatchers.Main) { adapter.notifyDataSetChanged() }
+        }
     }
 
         return inflater.inflate(R.layout.fragment_details_movie, container, false)

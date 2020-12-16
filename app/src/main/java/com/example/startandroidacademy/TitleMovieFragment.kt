@@ -7,11 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.startandroidacademy.data.Movie
+import com.example.startandroidacademy.data.loadMovies
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class TitleMovieFragment : Fragment() {
 
     private var onClickListenerToMovieDetails: OnClickListenerToMovieDetails? = null
+
+    private fun createSuperScope() = CoroutineScope(Dispatchers.IO)
+     private lateinit var adapter: MovieAdapter
   
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,9 +33,7 @@ class TitleMovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-      
-        val adapterMovie = MovieAdapter(
-            listMovie = listMovie,
+        adapter = MovieAdapter(
             onClickListenerToMovieDetails = object
                 : OnClickListenerToMovieDetails {
                 override fun onClickOpenDetailsMovieFragment(movie: Movie) {
@@ -36,8 +43,15 @@ class TitleMovieFragment : Fragment() {
         )
 
         val rv: RecyclerView? = view.findViewById(R.id.rv_movie)
-        rv?.adapter = adapterMovie
+        rv?.adapter = adapter
+        updateData()
+    }
 
+    private fun updateData() {
+        createSuperScope().launch {
+            adapter.bindMovies(loadMovies(this@TitleMovieFragment.requireContext()))
+            withContext(Dispatchers.Main) { adapter.notifyDataSetChanged() }
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -51,6 +65,7 @@ class TitleMovieFragment : Fragment() {
         onClickListenerToMovieDetails = null
     }
 
+
     companion object {
         @JvmStatic
         fun newInstance() = TitleMovieFragment()
@@ -58,4 +73,5 @@ class TitleMovieFragment : Fragment() {
         }
     }
 }
+
 

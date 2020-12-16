@@ -3,11 +3,14 @@ package com.example.startandroidacademy
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.startandroidacademy.data.Movie
 
 class MovieAdapter(
-    private val listMovie: List<Movie>,
     private val onClickListenerToMovieDetails: OnClickListenerToMovieDetails?
 ) : RecyclerView.Adapter<MovieViewHolder>() {
+
+    private var listMovie: List<Movie> = listOf()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder =
         MovieViewHolder(
@@ -26,5 +29,12 @@ class MovieAdapter(
     }
 
     override fun getItemCount(): Int = listMovie.size
+
+
+
+    fun bindMovies(newMovies : List<Movie>) {
+        listMovie = newMovies
+    }
+
 
 }
