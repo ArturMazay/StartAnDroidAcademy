@@ -45,7 +45,7 @@ class DetailsMovieFragment : Fragment() {
 
         val tvName: TextView = view.findViewById(R.id.tv_name)
         val ivBackgraund: ImageView = view.findViewById(R.id.iv_background)
-        val movie = requireArguments().getParcelable<Movie>(MOVIE_KEY)!!
+        val movie = requireArguments().getSerializable(MOVIE_KEY)!!
 
         movie.run {
             Glide.with(view.context).load(movie.poster).into(ivBackgraund)
