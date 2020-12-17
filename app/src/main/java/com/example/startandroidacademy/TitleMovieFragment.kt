@@ -2,6 +2,7 @@ package com.example.startandroidacademy
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.startandroidacademy.data.Movie
 import com.example.startandroidacademy.data.loadMovies
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 
 class TitleMovieFragment : Fragment() {
@@ -47,12 +45,25 @@ class TitleMovieFragment : Fragment() {
     }
 
     private fun updateData() {
-        createSuperScope().launch {
-            val mMovie = loadMovies(this@TitleMovieFragment.requireContext())
-            adapter.bindMovies(newMovies = mMovie)
+        createSuperScope().launch(superExceptionHandler) {
+            val job = loadMovies(requireContext())
+            adapter.bindMovies(job)
             withContext(Dispatchers.Main) { adapter.notifyDataSetChanged() }
         }
     }
+
+    private val superExceptionHandler = CoroutineExceptionHandler { canceledContext, exception ->
+        Log.e("TAG", "SuperExceptionHandler [canceledContext:$canceledContext]")
+        createSuperScope().launch {
+            logExceptionSuspend("superExceptionHandler", exception)
+        }
+    }
+
+    private suspend fun logExceptionSuspend(who: String, throwable: Throwable) =
+        withContext(Dispatchers.Main) {
+            Log.e("TAG", "$who::Failed", throwable)
+
+        }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

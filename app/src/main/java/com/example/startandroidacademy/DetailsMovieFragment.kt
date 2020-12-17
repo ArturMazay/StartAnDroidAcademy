@@ -18,7 +18,6 @@ import kotlinx.coroutines.Dispatchers
 
 class DetailsMovieFragment : Fragment() {
 
-    private fun coroutineScoop() = CoroutineScope(Dispatchers.IO)
     private lateinit var adapter: ActorAdapter
 
     override fun onCreateView(
@@ -42,6 +41,7 @@ class DetailsMovieFragment : Fragment() {
         val tag: TextView = view.findViewById(R.id.tv_tag)
 
         val movie = requireArguments().getSerializable(MOVIE_KEY) as Movie
+
         val listActor: List<Actor> = movie.actors
         val adapterActor = ActorAdapter(listActor)
         val recyclerView: RecyclerView? = view.findViewById(R.id.list_actor)
