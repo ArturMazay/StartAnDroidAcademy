@@ -12,9 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.startandroidacademy.data.Actor
 import com.example.startandroidacademy.data.Movie
-import com.example.startandroidacademy.data.loadMovies
-import com.example.startandroidacademy.data.parseActors
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 
 
 class DetailsMovieFragment : Fragment() {
@@ -38,26 +37,20 @@ class DetailsMovieFragment : Fragment() {
 
         }
 
+        val tvName: TextView = view.findViewById(R.id.tv_name)
+        val ivBackground: ImageView = view.findViewById(R.id.iv_background)
+        val tag: TextView = view.findViewById(R.id.tv_tag)
 
-        val adapterActor = ActorAdapter()
+        val movie = requireArguments().getSerializable(MOVIE_KEY) as Movie
+        val listActor: List<Actor> = movie.actors
+        val adapterActor = ActorAdapter(listActor)
         val recyclerView: RecyclerView? = view.findViewById(R.id.list_actor)
         recyclerView?.adapter = adapterActor
-
-        val tvName: TextView = view.findViewById(R.id.tv_name)
-        val ivBackgraund: ImageView = view.findViewById(R.id.iv_background)
-        val movie = requireArguments().getSerializable(MOVIE_KEY)!!
-
         movie.run {
-            Glide.with(view.context).load(movie.poster).into(ivBackgraund)
-            tvName.text = title
-            updateData()
-        }
-    }
+            Glide.with(view.context).load(movie.poster).into(ivBackground)
+            tvName.text = movie.title
+            tag.text = movie.getTag()
 
-    private fun updateData() {
-        coroutineScoop().async {
-            adapter.bindActor(parseActors(requireContext()))
-            withContext(Dispatchers.Main) { adapter.notifyDataSetChanged() }
         }
     }
 
@@ -67,7 +60,7 @@ class DetailsMovieFragment : Fragment() {
         @JvmStatic
         fun newInstance(movie: Movie) = DetailsMovieFragment().apply {
             arguments = Bundle().apply {
-                putParcelable(MOVIE_KEY, movie)
+                putSerializable(MOVIE_KEY, movie)
             }
         }
     }

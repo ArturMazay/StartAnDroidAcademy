@@ -19,7 +19,7 @@ class TitleMovieFragment : Fragment() {
 
     private var onClickListenerToMovieDetails: OnClickListenerToMovieDetails? = null
     private fun createSuperScope() = CoroutineScope(Dispatchers.IO)
-     private lateinit var adapter: MovieAdapter
+    private lateinit var adapter: MovieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +41,6 @@ class TitleMovieFragment : Fragment() {
             }
         )
 
-
         val rv: RecyclerView? = view.findViewById(R.id.rv_movie)
         rv?.adapter = adapter
         updateData()
@@ -49,7 +48,8 @@ class TitleMovieFragment : Fragment() {
 
     private fun updateData() {
         createSuperScope().launch {
-            adapter.bindMovies(loadMovies(this@TitleMovieFragment.requireContext()))
+            val mMovie = loadMovies(this@TitleMovieFragment.requireContext())
+            adapter.bindMovies(newMovies = mMovie)
             withContext(Dispatchers.Main) { adapter.notifyDataSetChanged() }
         }
     }
@@ -57,14 +57,12 @@ class TitleMovieFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         onClickListenerToMovieDetails = context as? OnClickListenerToMovieDetails
-
     }
 
     override fun onDetach() {
         super.onDetach()
         onClickListenerToMovieDetails = null
     }
-
 
     companion object {
         @JvmStatic
