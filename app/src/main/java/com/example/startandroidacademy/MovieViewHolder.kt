@@ -21,11 +21,11 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bindMovie(movie: Movie) {
         Glide.with(itemView.context).load(movie.poster).into(poster)
         tvName.text = movie.title
-        ratingBar.rating = movie.getRating()
-        tvAge.text = movie.getMinimumAge().toString()
-        tvTime.text = movie.getRuntime()
-        reviews.text = movie.getReview()
-        tag.text = movie.getTag()
+        ratingBar.rating = movie.ratings
+        tvAge.text = movie.minimumAge.toString()+"+"
+        tvTime.text = movie.runtime.toString()
+        reviews.text = movie.numberOfRatings.toString()
+        tag.text = movie.genres.joinToString(separator = ", ", transform = { genreItem -> genreItem.name })
     }
 
 }

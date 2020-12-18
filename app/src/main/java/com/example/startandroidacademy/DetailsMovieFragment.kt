@@ -44,7 +44,7 @@ class DetailsMovieFragment : Fragment() {
         movie.run {
             Glide.with(view.context).load(movie.poster).into(ivBackground)
             tvName.text = movie.title
-            tag.text = movie.getTag()
+            tag.text = movie.genres.joinToString(separator = ", ", transform = { genreItem -> genreItem.name })
             overview.text=movie.overview
 
         }
