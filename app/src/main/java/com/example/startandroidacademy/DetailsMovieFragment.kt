@@ -12,13 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.startandroidacademy.data.Actor
 import com.example.startandroidacademy.data.Movie
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-
 
 class DetailsMovieFragment : Fragment() {
-
-    private lateinit var adapter: ActorAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
