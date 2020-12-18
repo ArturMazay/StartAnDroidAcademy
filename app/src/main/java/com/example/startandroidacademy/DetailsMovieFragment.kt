@@ -18,9 +18,7 @@ class DetailsMovieFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_details_movie, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_details_movie, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,8 +42,10 @@ class DetailsMovieFragment : Fragment() {
         movie.run {
             Glide.with(view.context).load(movie.poster).into(ivBackground)
             tvName.text = movie.title
-            tag.text = movie.genres.joinToString(separator = ", ", transform = { genreItem -> genreItem.name })
-            overview.text=movie.overview
+            tag.text = movie.genres.joinToString(
+                separator = ", ",
+                transform = { genreItem -> genreItem.name })
+            overview.text = movie.overview
 
         }
     }

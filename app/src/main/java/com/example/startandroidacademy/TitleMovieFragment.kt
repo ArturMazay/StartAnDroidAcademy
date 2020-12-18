@@ -16,16 +16,13 @@ import kotlinx.coroutines.*
 class TitleMovieFragment : Fragment() {
 
     private var onClickListenerToMovieDetails: OnClickListenerToMovieDetails? = null
-    private fun createSuperScope() = CoroutineScope(Dispatchers.IO)
+    private val createSuperScope = CoroutineScope(Dispatchers.IO)
     private lateinit var adapter: MovieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-        return inflater.inflate(R.layout.fragment_title_movie, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_title_movie, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,16 +42,18 @@ class TitleMovieFragment : Fragment() {
     }
 
     private fun updateData() {
-        createSuperScope().launch(superExceptionHandler) {
-            val job = loadMovies(requireContext())
-            adapter.bindMovies(job)
-            withContext(Dispatchers.Main) { adapter.notifyDataSetChanged() }
+        createSuperScope.launch(superExceptionHandler) {
+            val movieList = loadMovies(requireContext())
+            withContext(Dispatchers.Main) {
+                adapter.bindMovies(movieList.toMutableList())
+                adapter.notifyDataSetChanged()
+            }
         }
     }
 
     private val superExceptionHandler = CoroutineExceptionHandler { canceledContext, exception ->
         Log.e("TAG", "SuperExceptionHandler [canceledContext:$canceledContext]")
-        createSuperScope().launch {
+        createSuperScope.launch {
             logExceptionSuspend("superExceptionHandler", exception)
         }
     }
@@ -73,6 +72,11 @@ class TitleMovieFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         onClickListenerToMovieDetails = null
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        createSuperScope.cancel()
     }
 
     companion object {
