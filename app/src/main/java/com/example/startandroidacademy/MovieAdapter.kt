@@ -34,6 +34,7 @@ class MovieAdapter(
 
     fun bindMovies(newMovies : List<Movie>) {
         listMovie = newMovies
+
     }
 
 

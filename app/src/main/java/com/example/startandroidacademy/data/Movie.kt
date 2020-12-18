@@ -11,7 +11,7 @@ data class Movie(
     val backdrop: String?,
     val ratings: Float,
     val numberOfRatings: Int,
-    val minimumAge: Int?,
+    val minimumAge: Int,
     val runtime: Int,
     val genres: List<Genre>,
     val actors: List<Actor>
@@ -34,8 +34,8 @@ data class Movie(
         return genres.joinToString(separator = ", ", transform = { genreItem -> genreItem.name })
     }
 
-    fun getMinimumAge(): Int {
-        return  16
+    fun getMinimumAge(): Int? {
+        return  minimumAge
     }
 
 }
