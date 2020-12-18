@@ -28,12 +28,12 @@ class DetailsMovieFragment : Fragment() {
         val viewBack: Button = view.findViewById(R.id.button_back)
         viewBack.setOnClickListener {
             requireActivity().onBackPressed()
-
         }
 
         val tvName: TextView = view.findViewById(R.id.tv_name)
         val ivBackground: ImageView = view.findViewById(R.id.iv_background)
         val tag: TextView = view.findViewById(R.id.tv_tag)
+        val overview: TextView = view.findViewById(R.id.tv_storyline)
 
         val movie = requireArguments().getSerializable(MOVIE_KEY) as Movie
 
@@ -45,6 +45,7 @@ class DetailsMovieFragment : Fragment() {
             Glide.with(view.context).load(movie.poster).into(ivBackground)
             tvName.text = movie.title
             tag.text = movie.getTag()
+            overview.text=movie.overview
 
         }
     }

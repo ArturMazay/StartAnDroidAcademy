@@ -11,7 +11,6 @@ class MovieAdapter(
 
     private var listMovie: List<Movie> = listOf()
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder =
         MovieViewHolder(
             itemView = LayoutInflater.from(parent.context)
@@ -24,18 +23,13 @@ class MovieAdapter(
         holder.itemView.setOnClickListener {
             val movie = listMovie[position]
             onClickListenerToMovieDetails?.onClickOpenDetailsMovieFragment(movie)
-
         }
     }
 
     override fun getItemCount(): Int = listMovie.size
 
-
-
-    fun bindMovies(newMovies : List<Movie>) {
+    fun bindMovies(newMovies: List<Movie>) {
         listMovie = newMovies
 
     }
-
-
 }

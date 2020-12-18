@@ -2,7 +2,6 @@ package com.example.startandroidacademy.data
 
 import java.io.Serializable
 
-
 data class Movie(
     val id: Int,
     val title: String?,
@@ -24,7 +23,6 @@ data class Movie(
     fun getRuntime(): String {
         return "$runtime min"
     }
-
 
     fun getRating(): Float {
         return if (ratings <= 0) 0F else ratings / 2
