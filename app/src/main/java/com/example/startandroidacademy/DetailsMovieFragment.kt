@@ -12,63 +12,52 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.startandroidacademy.data.Actor
 import com.example.startandroidacademy.data.Movie
-import com.example.startandroidacademy.data.loadMovies
-import com.example.startandroidacademy.data.parseActors
-import kotlinx.coroutines.*
-
 
 class DetailsMovieFragment : Fragment() {
-
-    private fun coroutineScoop() = CoroutineScope(Dispatchers.IO)
-    private lateinit var adapter: ActorAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_details_movie, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_details_movie, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         val viewBack: Button = view.findViewById(R.id.button_back)
         viewBack.setOnClickListener {
             requireActivity().onBackPressed()
-
         }
-
-
-        val adapterActor = ActorAdapter()
-        val recyclerView: RecyclerView? = view.findViewById(R.id.list_actor)
-        recyclerView?.adapter = adapterActor
 
         val tvName: TextView = view.findViewById(R.id.tv_name)
-        val ivBackgraund: ImageView = view.findViewById(R.id.iv_background)
-        val movie = requireArguments().getParcelable<Movie>(MOVIE_KEY)!!
-     
+        val ivBackground: ImageView = view.findViewById(R.id.iv_background)
+        val tag: TextView = view.findViewById(R.id.tv_tag)
+        val overview: TextView = view.findViewById(R.id.tv_storyline)
+
+        val movie = requireArguments().getSerializable(MOVIE_KEY) as Movie
+
+        val listActor: List<Actor> = movie.actors
+        val adapterActor = ActorAdapter(listActor)
+        val recyclerView: RecyclerView? = view.findViewById(R.id.list_actor)
+        recyclerView?.adapter = adapterActor
         movie.run {
-            Glide.with(view.context).load(movie.poster).into(ivBackgraund)
-            tvName.text = title
-            updateData()
+            Glide.with(view.context).load(movie.poster).into(ivBackground)
+            tvName.text = movie.title
+            tag.text = movie.genres.joinToString(
+                separator = ", ",
+                transform = { genreItem -> genreItem.name })
+            overview.text = movie.overview
+
         }
     }
-
-    private fun updateData() {
-        coroutineScoop().async {
-            adapter.bindActor(parseActors(requireContext()))
-            withContext(Dispatchers.Main) { adapter.notifyDataSetChanged() }
-        }
-    }
-
-        return inflater.inflate(R.layout.fragment_details_movie, container, false)
-    }
-
 
     companion object {
-        @JvmStatic
-        fun newInstance() = DetailsMovieFragment()
+        const val MOVIE_KEY = "keymovie"
 
+        @JvmStatic
+        fun newInstance(movie: Movie) = DetailsMovieFragment().apply {
+            arguments = Bundle().apply {
+                putSerializable(MOVIE_KEY, movie)
+            }
+        }
     }
 }
