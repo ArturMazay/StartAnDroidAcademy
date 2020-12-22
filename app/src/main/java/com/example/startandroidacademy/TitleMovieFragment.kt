@@ -16,7 +16,7 @@ import kotlinx.coroutines.*
 class TitleMovieFragment : Fragment() {
 
     private var onClickListenerToMovieDetails: OnClickListenerToMovieDetails? = null
-    private val createSuperScope = CoroutineScope(Dispatchers.IO)
+   // private val createSuperScope = CoroutineScope(Dispatchers.IO)
     private lateinit var adapter: MovieAdapter
 
     override fun onCreateView(
@@ -38,10 +38,10 @@ class TitleMovieFragment : Fragment() {
 
         val rv: RecyclerView? = view.findViewById(R.id.rv_movie)
         rv?.adapter = adapter
-        updateData()
+        //updateData()
     }
 
-    private fun updateData() {
+   /* private fun updateData() {
         createSuperScope.launch(superExceptionHandler) {
             val movieList = loadMovies(requireContext())
             withContext(Dispatchers.Main) {
@@ -62,7 +62,7 @@ class TitleMovieFragment : Fragment() {
         withContext(Dispatchers.Main) {
             Log.e("TAG", "$who::Failed", throwable)
 
-        }
+        }*/
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -76,7 +76,7 @@ class TitleMovieFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        createSuperScope.cancel()
+       // createSuperScope.cancel()
     }
 
     companion object {

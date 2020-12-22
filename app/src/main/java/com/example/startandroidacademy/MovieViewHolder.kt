@@ -22,7 +22,8 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         Glide.with(itemView.context).load(movie.poster).into(poster)
         tvName.text = movie.title
         ratingBar.rating = movie.ratings
-        tvAge.text = movie.minimumAge.toString()+"+"
+        val ageText = "${movie.minimumAge} +"
+        tvAge.text = ageText
         tvTime.text = movie.runtime.toString()
         reviews.text = movie.numberOfRatings.toString()
         tag.text = movie.genres.joinToString(separator = ", ", transform = { genreItem -> genreItem.name })
