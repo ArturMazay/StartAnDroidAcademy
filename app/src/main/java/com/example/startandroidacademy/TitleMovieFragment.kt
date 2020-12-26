@@ -2,22 +2,24 @@ package com.example.startandroidacademy
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.startandroidacademy.data.Movie
-import com.example.startandroidacademy.data.loadMovies
-import kotlinx.coroutines.*
 
 
 class TitleMovieFragment : Fragment() {
 
     private var onClickListenerToMovieDetails: OnClickListenerToMovieDetails? = null
-   // private val createSuperScope = CoroutineScope(Dispatchers.IO)
+
+    // private val createSuperScope = CoroutineScope(Dispatchers.IO)
     private lateinit var adapter: MovieAdapter
+    private lateinit var viewModel: TitleViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +28,7 @@ class TitleMovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this).get(TitleViewModel::class.java)
 
         adapter = MovieAdapter(
             onClickListenerToMovieDetails = object
@@ -38,31 +41,17 @@ class TitleMovieFragment : Fragment() {
 
         val rv: RecyclerView? = view.findViewById(R.id.rv_movie)
         rv?.adapter = adapter
-        //updateData()
+
+       //что то не могу подписаться не пойму чтокосячу или это из за этого  MutableStateFlow<List<Movie>>(listOf())?
+        //или впечатление что зависимость не подтянул какую то...
+       viewModel.getMovies().observe(viewLifecycleOwner, Observer {
+           it.let{
+               adapter.data = it
+               adapter.notifyDataSetChanged()
+           }
+       })
     }
 
-   /* private fun updateData() {
-        createSuperScope.launch(superExceptionHandler) {
-            val movieList = loadMovies(requireContext())
-            withContext(Dispatchers.Main) {
-                adapter.bindMovies(movieList.toMutableList())
-                adapter.notifyDataSetChanged()
-            }
-        }
-    }
-
-    private val superExceptionHandler = CoroutineExceptionHandler { canceledContext, exception ->
-        Log.e("TAG", "SuperExceptionHandler [canceledContext:$canceledContext]")
-        createSuperScope.launch {
-            logExceptionSuspend("superExceptionHandler", exception)
-        }
-    }
-
-    private suspend fun logExceptionSuspend(who: String, throwable: Throwable) =
-        withContext(Dispatchers.Main) {
-            Log.e("TAG", "$who::Failed", throwable)
-
-        }*/
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -76,7 +65,7 @@ class TitleMovieFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-       // createSuperScope.cancel()
+        // createSuperScope.cancel()
     }
 
     companion object {

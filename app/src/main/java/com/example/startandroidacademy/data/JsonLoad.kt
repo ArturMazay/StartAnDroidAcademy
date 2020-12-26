@@ -1,12 +1,14 @@
 package com.example.startandroidacademy.data
 
 import android.content.Context
+import androidx.core.content.ContentProviderCompat.requireContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import org.koin.dsl.module
 
 
 private val jsonFormat = Json { ignoreUnknownKeys = true }
@@ -74,6 +76,7 @@ internal suspend fun loadMovies(context: Context): List<Movie> = withContext(Dis
 
     val data = readAssetFileToString(context, "data.json")
     parseMovies(data, genresMap, actorsMap)
+
 }
 
 internal fun parseMovies(
