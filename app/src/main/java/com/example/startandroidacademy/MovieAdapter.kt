@@ -12,7 +12,7 @@ class MovieAdapter(
      var listMovie = listOf<Movie>()
         set(value) {
             field = value
-            notifyDataSetChanged()
+            //notifyDataSetChanged()
         }
     // private val listMovie: List<Movie> = mutableListOf()
 
