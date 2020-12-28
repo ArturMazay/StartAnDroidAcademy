@@ -30,7 +30,7 @@ class TitleMovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider.of(this,factory).get(TitleViewModel::class.java)
+        viewModel = ViewModelProvider(this,factory).get(TitleViewModel::class.java)
 
 
         adapter = MovieAdapter(
