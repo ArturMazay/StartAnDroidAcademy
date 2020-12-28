@@ -16,7 +16,6 @@ class TitleMovieFragment : Fragment() {
     private lateinit var factory: MoviesViewModelFactory
     private var onClickListenerToMovieDetails: OnClickListenerToMovieDetails? = null
 
-    // private val createSuperScope = CoroutineScope(Dispatchers.IO)
     private lateinit var adapter: MovieAdapter
     private lateinit var viewModel: TitleViewModel
 
@@ -29,9 +28,8 @@ class TitleMovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val repository = Repository(requireContext())
-        factory = MoviesViewModelFactory(repository)
-        viewModel = ViewModelProvider(this,factory).get(TitleViewModel::class.java)
+        factory = MoviesViewModelFactory(requireContext())
+        viewModel = ViewModelProvider(this, factory).get(TitleViewModel::class.java)
 
 
         adapter = MovieAdapter(
@@ -68,7 +66,6 @@ class TitleMovieFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // createSuperScope.cancel()
     }
 
     companion object {
