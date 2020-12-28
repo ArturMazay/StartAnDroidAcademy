@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.startandroidacademy.data.Movie
-import java.util.EnumSet.of
 
 
 class TitleMovieFragment : Fragment() {
@@ -30,6 +29,8 @@ class TitleMovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val repository = Repository(requireContext())
+        factory = MoviesViewModelFactory(repository)
         viewModel = ViewModelProvider(this,factory).get(TitleViewModel::class.java)
 
 
