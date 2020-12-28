@@ -10,10 +10,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.startandroidacademy.data.Movie
+import java.util.EnumSet.of
 
 
 class TitleMovieFragment : Fragment() {
-
+    private lateinit var factory: MoviesViewModelFactory
     private var onClickListenerToMovieDetails: OnClickListenerToMovieDetails? = null
 
     // private val createSuperScope = CoroutineScope(Dispatchers.IO)
@@ -25,10 +26,12 @@ class TitleMovieFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_title_movie, container, false)
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(TitleViewModel::class.java)
+        viewModel = ViewModelProvider.of(this,factory).get(TitleViewModel::class.java)
+
 
         adapter = MovieAdapter(
             onClickListenerToMovieDetails = object

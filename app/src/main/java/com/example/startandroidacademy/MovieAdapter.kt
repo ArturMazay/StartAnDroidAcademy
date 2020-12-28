@@ -9,7 +9,7 @@ class MovieAdapter(
     private val onClickListenerToMovieDetails: OnClickListenerToMovieDetails?
 ) : RecyclerView.Adapter<MovieViewHolder>() {
 
-     var listMovie = listOf<Movie>()
+      var listMovie = listOf<Movie>()
         set(value) {
             field = value
             //notifyDataSetChanged()
