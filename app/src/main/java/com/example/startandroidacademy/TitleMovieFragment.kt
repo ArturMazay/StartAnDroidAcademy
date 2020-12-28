@@ -6,14 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.startandroidacademy.data.Movie
 
 
-class TitleMovieFragment : Fragment() {
+
+class TitleMovieFragment : Fragment(),LifecycleOwner {
 
     private var onClickListenerToMovieDetails: OnClickListenerToMovieDetails? = null
 
@@ -28,6 +29,7 @@ class TitleMovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel = ViewModelProvider(this).get(TitleViewModel::class.java)
 
         adapter = MovieAdapter(
@@ -42,16 +44,16 @@ class TitleMovieFragment : Fragment() {
         val rv: RecyclerView? = view.findViewById(R.id.rv_movie)
         rv?.adapter = adapter
 
-       //что то не могу подписаться не пойму чтокосячу или это из за этого  MutableStateFlow<List<Movie>>(listOf())?
-        //или впечатление что зависимость не подтянул какую то...
-       viewModel.getMovies().observe(viewLifecycleOwner, Observer {
-           it.let{
-               adapter.data = it
-               adapter.notifyDataSetChanged()
-           }
-       })
-    }
 
+        viewModel.movies.observe(viewLifecycleOwner, Observer {
+            it.let {
+                adapter.listMovie=it
+               // adapter.notifyDataSetChanged()
+            }
+        })
+
+
+        }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -73,5 +75,6 @@ class TitleMovieFragment : Fragment() {
         fun newInstance() = TitleMovieFragment()
     }
 }
+
 
 

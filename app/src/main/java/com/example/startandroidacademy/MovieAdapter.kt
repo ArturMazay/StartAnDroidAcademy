@@ -9,15 +9,12 @@ class MovieAdapter(
     private val onClickListenerToMovieDetails: OnClickListenerToMovieDetails?
 ) : RecyclerView.Adapter<MovieViewHolder>() {
 
-    var data = mutableListOf<Movie>()
+     var listMovie = listOf<Movie>()
         set(value) {
             field = value
+            notifyDataSetChanged()
         }
-
-    /*private val listMovie: List<Movie> = mutableListOf()
-       *//* set(value) {
-            field = value
-        }*/
+    // private val listMovie: List<Movie> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder =
         MovieViewHolder(
@@ -26,15 +23,15 @@ class MovieAdapter(
         )
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bindMovie(data[position])
+        holder.bindMovie(listMovie[position])
 
         holder.itemView.setOnClickListener {
-            val movie = data[position]
+            val movie = listMovie[position]
             onClickListenerToMovieDetails?.onClickOpenDetailsMovieFragment(movie)
         }
     }
 
-    override fun getItemCount(): Int = data.size
+    override fun getItemCount(): Int = listMovie.size
 
     /*fun bindMovies(newMovies: MutableList<Movie>) {
         newMovies.run {
