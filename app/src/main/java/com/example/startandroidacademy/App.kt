@@ -12,7 +12,7 @@ class App : Application() {
 
     private val appModule = module {
         single { Repository(context = get()) }       //вот такая запись делает мой класс репозитория зависмистью/зависимы? и выдергивает/или предоставляет ему контекс из него контекст
-        single { MoviesViewModelFactory(context = get()) }     //и во всех моих классах которые добавлены в модуль в конструкторах должен быть контекст?
+       // single { MoviesViewModelFactory(context = get()) }     //и во всех моих классах которые добавлены в модуль в конструкторах должен быть контекст?
 
     }
 

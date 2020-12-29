@@ -22,15 +22,16 @@ class TitleMovieFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_title_movie, container, false)
-
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_title_movie, container, false)
+        factory = MoviesViewModelFactory(requireContext())
+        return view
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        factory = MoviesViewModelFactory(requireContext())
-        viewModel = ViewModelProvider(this, factory).get(TitleViewModel::class.java)
-
+        viewModel = ViewModelProvider(this).get(TitleViewModel::class.java)
 
         adapter = MovieAdapter(
             onClickListenerToMovieDetails = object
@@ -43,7 +44,6 @@ class TitleMovieFragment : Fragment() {
 
         val rv: RecyclerView? = view.findViewById(R.id.rv_movie)
         rv?.adapter = adapter
-
 
         viewModel.movies.observe(viewLifecycleOwner, Observer {
             it.let {
