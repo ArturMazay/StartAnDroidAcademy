@@ -10,7 +10,7 @@ import com.example.startandroidacademy.data.Movie
 import kotlinx.coroutines.launch
 
 
-class TitleViewModel(context: Context) : ViewModel() {
+class TitleViewModel(val context: Context) : ViewModel() {
 
     private val repo = Repository(context)
     private val _movies = MutableLiveData<List<Movie>>()
