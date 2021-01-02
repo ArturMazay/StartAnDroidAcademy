@@ -9,7 +9,10 @@ class MovieAdapter(
     private val onClickListenerToMovieDetails: OnClickListenerToMovieDetails?
 ) : RecyclerView.Adapter<MovieViewHolder>() {
 
-    private var listMovie: List<Movie> = mutableListOf()
+    var listMovie = listOf<Movie>()
+        set(value) {
+            field = value
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder =
         MovieViewHolder(
@@ -27,12 +30,4 @@ class MovieAdapter(
     }
 
     override fun getItemCount(): Int = listMovie.size
-
-    fun bindMovies(newMovies: MutableList<Movie>) {
-        newMovies.run {
-            clear()
-            addAll(listMovie)
-        }
-
-    }
 }

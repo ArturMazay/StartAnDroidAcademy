@@ -74,6 +74,7 @@ internal suspend fun loadMovies(context: Context): List<Movie> = withContext(Dis
 
     val data = readAssetFileToString(context, "data.json")
     parseMovies(data, genresMap, actorsMap)
+
 }
 
 internal fun parseMovies(
