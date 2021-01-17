@@ -4,9 +4,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class JsonActor(
-    val id: Int,
-    val name: String,
-    @SerialName("profile_path")
-    val profilePicture: String
+data class MoviesResponse(
+    @SerialName("page")
+    val page: Int,
+    @SerialName("results")
+    val movies: List<JsonMovie>
 )
