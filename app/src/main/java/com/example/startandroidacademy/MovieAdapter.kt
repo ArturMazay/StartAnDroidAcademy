@@ -5,14 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.startandroidacademy.data.Movie
 
-class MovieAdapter(
+class MovieAdapter(var listMovie:List<Movie> = listOf(),
     private val onClickListenerToMovieDetails: OnClickListenerToMovieDetails?
 ) : RecyclerView.Adapter<MovieViewHolder>() {
 
-    var listMovie = listOf<Movie>()
-        set(value) {
-            field = value
-        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder =
         MovieViewHolder(
