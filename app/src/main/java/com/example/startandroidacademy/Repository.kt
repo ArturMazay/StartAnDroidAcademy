@@ -11,24 +11,41 @@ import com.example.startandroidacademy.network.MoviesResponse
 
 class Repository(private val moviesApi: MoviesApi) {
 
-    suspend fun loadGenres() = moviesApi.getGenres()
+    private suspend fun loadGenres() = moviesApi.getGenres()
 
-    suspend fun loadPopularMovies(page: Int = 1) = moviesApi.getPopularMovies(page)
+    private suspend fun loadPopularMovies(page: Int) = moviesApi.getPopularMovies(page)
+
+    private suspend fun loadActors(movieID: Int) = moviesApi.getMovieActors(movieID)
 
 
-    suspend fun loadMovieDetails(movieId: Int) = moviesApi.getMovieById(movieId)
+    private suspend fun loadGenre(): List<Genre> {
+        val data = loadGenres()
+        return parseGenresListResponse(data)
+    }
 
+    private suspend fun loadActor(movieID: Int): List<Actor> {
+        val data = loadActors(movieID)
+        return parseActorsListResponse(data)
+    }
 
-    suspend fun loadActors(movieId: Int) = moviesApi.getMovieActors(movieId)
+    suspend fun loadMovies(page: Int, movieID: Int): List<Movie> {
+        val genresMap = loadGenre()
+        val actorsMap = loadActor(movieID)
 
-    internal fun loadMovies(
+        val data = loadPopularMovies(page)
+        return mapMovies(data, genresMap, actorsMap)
+
+    }
+
+    private fun mapMovies(
         moviesResponse: MoviesResponse,
-        genresResponse: GenresResponse,
-        actorResponse: ActorResponse // вот тут вставляю параметры(результаты запросов с апи) и маплю , правильно же?
+        genres: List<Genre>,
+        actors: List<Actor>
     ): List<Movie> {
 
-        val genresMap = parseGenresListResponse(genresResponse)
-        val actorsMap = parseActorsListResponse(actorResponse)
+        val genresMap = genres.associateBy { it.id }
+        val actorsMap = actors.associateBy { it.id }
+
 
         return moviesResponse.movies.map { jsonMovie ->
             Movie(
@@ -42,10 +59,10 @@ class Repository(private val moviesApi: MoviesApi) {
                 minimumAge = if (jsonMovie.adult) 16 else 13,
                 runtime = jsonMovie.runtime,
                 genres = jsonMovie.genreIds.map {
-                    genresMap[it]
+                    genresMap[it] ?: throw IllegalArgumentException("Genre not found")
                 },
                 actors = jsonMovie.actors.map {
-                    actorsMap[it]
+                    actorsMap[it] ?: throw IllegalArgumentException("Actor not found")
                 }
             )
         }

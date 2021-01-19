@@ -19,8 +19,6 @@ interface MoviesApi {
     @GET("movie/popular")
     suspend fun getPopularMovies(@Query("page") page: Int) : MoviesResponse
 
-   @GET("movie/{id}")
-   suspend fun getMovieById(@Path("id") id: Int): JsonMovie
 
     @GET("movie/{movie_id}/credits")
    suspend fun getMovieActors(@Path("movie_id") id: Int) : ActorResponse
@@ -35,7 +33,7 @@ interface MoviesApi {
         private const val API_KEY = "f9a69c2690fc50b90e76792d9601d4fb"
 
         @ExperimentalSerializationApi
-        fun create() : MoviesApi {
+        operator fun invoke() : MoviesApi {
             val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
 
             val authInterceptor = Interceptor { chain ->

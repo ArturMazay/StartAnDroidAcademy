@@ -10,6 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.startandroidacademy.data.Movie
+import com.example.startandroidacademy.network.MoviesApi
+import kotlinx.serialization.ExperimentalSerializationApi
 
 
 class TitleMovieFragment : Fragment() {
@@ -19,12 +21,16 @@ class TitleMovieFragment : Fragment() {
     private lateinit var adapter: MovieAdapter
     private lateinit var viewModel: TitleViewModel
 
+    @ExperimentalSerializationApi
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_title_movie, container, false)
-        factory = MoviesViewModelFactory(requireContext())
+
+        val api = MoviesApi()
+        val repo =Repository(api)
+        factory = MoviesViewModelFactory(repo)
         return view
     }
 
