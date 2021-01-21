@@ -24,8 +24,8 @@ interface MoviesApi {
    suspend fun getMovieActors(@Path("movie_id") id: Int) : ActorResponse
 
     @GET("genre/movie/list")
-    suspend fun getGenres() : GenresResponse //жанры
-
+    suspend fun getGenres() : GenresResponse //жанры, не совсем понимаю для чего делать второй запрос для получения жанров,если апи по запросу
+                                              //фильмов попопулярности дает и жанры?, но у меня не вышло ихразмапить без такого запроса
 
     companion object {
 

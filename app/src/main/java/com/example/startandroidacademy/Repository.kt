@@ -43,8 +43,6 @@ class Repository(private val moviesApi: MoviesApi) {
     ): List<Movie> {
 
         val genresMap = genres.associateBy { it.id }
-        //val actorsMap = actors.associateBy { it.id }
-
 
         return moviesResponse.movies.map { jsonMovie ->
             Movie(
@@ -53,10 +51,10 @@ class Repository(private val moviesApi: MoviesApi) {
                 overview = jsonMovie.overview,
                 poster = jsonMovie.posterPicture,
                 backdrop = jsonMovie.backdropPicture,
-                ratings = jsonMovie.ratings,
-                numberOfRatings = jsonMovie.votesCount,
-                minimumAge = if (jsonMovie.adult) 16 else 13,
-                runtime = jsonMovie.runtime,
+                voteAverage = jsonMovie.voteAverage,
+                adult = if (jsonMovie.adult) 16 else 13,
+                releaseDate = jsonMovie.releaseDate,
+                voteCount = jsonMovie.votesCount,
                 genres = jsonMovie.genreIds.map {
                     genresMap[it] ?: throw IllegalArgumentException("Genre not found")
                 }
@@ -80,7 +78,7 @@ class Repository(private val moviesApi: MoviesApi) {
         actorResponse: ActorResponse
     ): List<Actor> {
 
-        return actorResponse.actors.map { jsonActor ->
+        return actorResponse.cast.map { jsonActor ->
             Actor(
                 id = jsonActor.id,
                 name = jsonActor.name,
