@@ -29,7 +29,7 @@ class TitleViewModel(private val repository: Repository) : ViewModel() {
     private fun getMovies() {
         viewModelScope.launch (exceptionHandler) {
             _movies.value =
-                repository.loadMovies(page = 1,32232)  // вот тут жду готовый лист мови, но хз что ему туда положить...
+                repository.loadMovies(page = 1)  // вот тут жду готовый лист мови, но хз что ему туда положить...
 
         }
     }

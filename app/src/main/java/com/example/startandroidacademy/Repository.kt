@@ -28,23 +28,22 @@ class Repository(private val moviesApi: MoviesApi) {
         return parseActorsListResponse(data)
     }
 
-    suspend fun loadMovies(page: Int, movieID: Int): List<Movie> {
+    suspend fun loadMovies(page: Int): List<Movie> {
         val genresMap = loadGenre()
-        val actorsMap = loadActor(movieID)
+        //val actorsMap = loadActor()
 
         val data = loadPopularMovies(page)
-        return mapMovies(data, genresMap, actorsMap)
+        return mapMovies(data, genresMap)
 
     }
 
     private fun mapMovies(
         moviesResponse: MoviesResponse,
-        genres: List<Genre>,
-        actors: List<Actor>
+        genres: List<Genre>
     ): List<Movie> {
 
         val genresMap = genres.associateBy { it.id }
-        val actorsMap = actors.associateBy { it.id }
+        //val actorsMap = actors.associateBy { it.id }
 
 
         return moviesResponse.movies.map { jsonMovie ->
@@ -60,9 +59,6 @@ class Repository(private val moviesApi: MoviesApi) {
                 runtime = jsonMovie.runtime,
                 genres = jsonMovie.genreIds.map {
                     genresMap[it] ?: throw IllegalArgumentException("Genre not found")
-                },
-                actors = jsonMovie.actors.map {
-                    actorsMap[it] ?: throw IllegalArgumentException("Actor not found")
                 }
             )
         }

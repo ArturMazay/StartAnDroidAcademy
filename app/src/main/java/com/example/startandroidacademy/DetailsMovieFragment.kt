@@ -35,7 +35,7 @@ class DetailsMovieFragment : Fragment() {
 
         val movie = requireArguments().getSerializable(MOVIE_KEY) as Movie
 
-        val listActor: List<Actor> = movie.actors
+        val listActor = List<Actor>
         val adapterActor = ActorAdapter(listActor)
         val recyclerView: RecyclerView? = view.findViewById(R.id.list_actor)
         recyclerView?.adapter = adapterActor

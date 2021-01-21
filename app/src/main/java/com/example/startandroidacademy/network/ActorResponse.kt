@@ -6,14 +6,18 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ActorResponse(
-    val actors: List<JsonActor>
+    @SerialName("id")
+    val id: Int,
+    @SerialName("cast")
+    val cast: List<JsonActor>,
 )
 
 @Serializable
 data class JsonActor(
+    @SerialName("id")
     val id: Int,
+    @SerialName("name")
     val name: String,
-
     @SerialName("profile_path")
-    val profilePath: String?
+    val profilePath: String?,
 )
