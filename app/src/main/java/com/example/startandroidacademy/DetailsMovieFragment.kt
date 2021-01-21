@@ -10,10 +10,13 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.startandroidacademy.data.Actor
 import com.example.startandroidacademy.data.Movie
 
 class DetailsMovieFragment : Fragment() {
+
+    private lateinit var viewModel: DetailsViewModel
+    private lateinit var adapter: ActorAdapter
+    private val recyclerView: RecyclerView? = view?.findViewById(R.id.list_actor)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,6 +25,7 @@ class DetailsMovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         val viewBack: Button = view.findViewById(R.id.button_back)
         viewBack.setOnClickListener {
@@ -35,10 +39,7 @@ class DetailsMovieFragment : Fragment() {
 
         val movie = requireArguments().getSerializable(MOVIE_KEY) as Movie
 
-        val listActor = List<Actor>
-        val adapterActor = ActorAdapter(listActor)
-        val recyclerView: RecyclerView? = view.findViewById(R.id.list_actor)
-        recyclerView?.adapter = adapterActor
+        recyclerView?.adapter = adapter
         movie.run {
             Glide.with(view.context).load(movie.poster).into(ivBackground)
             tvName.text = movie.title
@@ -48,6 +49,11 @@ class DetailsMovieFragment : Fragment() {
             overview.text = movie.overview
 
         }
+
+        viewModel.actors.observe(viewLifecycleOwner, {
+            adapter.listActor = it
+            adapter.notifyDataSetChanged()
+        })
     }
 
     companion object {

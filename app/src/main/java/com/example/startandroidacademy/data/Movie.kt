@@ -11,6 +11,5 @@ data class Movie(
     val voteAverage: Float, // звезды
     val voteCount: Int, //голоса кол во
     val adult: Int,
-   val releaseDate:Int,
     val genres: List<Genre>
 ) : Serializable

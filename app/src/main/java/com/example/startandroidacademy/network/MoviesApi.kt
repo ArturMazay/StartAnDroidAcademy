@@ -9,6 +9,7 @@ import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,15 +17,15 @@ import retrofit2.http.Query
 
 interface MoviesApi {
 
-    @GET("movie/popular")
-    suspend fun getPopularMovies(@Query("page") page: Int) : MoviesResponse
+    @GET("movie/popular?")
+    suspend fun getPopularMovies(@Query("page") page: Int) : Response <MoviesResponse>
 
 
-    @GET("movie/{movie_id}/credits")
-   suspend fun getMovieActors(@Path("movie_id") id: Int) : ActorResponse
+    @GET("movie/{movie_id}/credits?")
+   suspend fun getMovieActors(@Path("movie_id") id: Int) : Response <ActorResponse>
 
-    @GET("genre/movie/list")
-    suspend fun getGenres() : GenresResponse //жанры, не совсем понимаю для чего делать второй запрос для получения жанров,если апи по запросу
+    @GET("genre/movie/list?")
+    suspend fun getGenres() : Response <GenresResponse> //жанры, не совсем понимаю для чего делать второй запрос для получения жанров,если апи по запросу
                                               //фильмов попопулярности дает и жанры?, но у меня не вышло ихразмапить без такого запроса
 
     companion object {

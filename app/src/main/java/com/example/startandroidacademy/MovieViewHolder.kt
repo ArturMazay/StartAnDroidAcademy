@@ -19,13 +19,12 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val ratingBar: RatingBar = itemView.findViewById(R.id.rating)
 
     fun bindMovie(movie: Movie) {
-        Glide.with(itemView.context).load(movie.poster).into(poster)
+        Glide.with(itemView.context).load(movie.backdrop).into(poster)
         tvName.text = movie.title
-        ratingBar.rating = movie.ratings
+        ratingBar.rating = movie.voteAverage
         val ageText = "${movie.adult} +"
         tvAge.text = ageText
-        releaseDate.text= movie.releaseDate.toString()
-        reviews.text = movie.vote_count.toString()
+        reviews.text = movie.voteCount.toString()
         tag.text = movie.genres.joinToString(separator = ", ", transform = { genreItem -> genreItem.name })
     }
 

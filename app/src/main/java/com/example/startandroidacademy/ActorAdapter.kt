@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.startandroidacademy.data.Actor
 
-class ActorAdapter(private val listActor: List<Actor> = listOf()) :
+class ActorAdapter(var listActor: List<Actor> = listOf()) :
     RecyclerView.Adapter<ActorViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorViewHolder =

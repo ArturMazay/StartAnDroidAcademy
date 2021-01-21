@@ -3,19 +3,17 @@ package com.example.startandroidacademy
 import com.example.startandroidacademy.data.Actor
 import com.example.startandroidacademy.data.Genre
 import com.example.startandroidacademy.data.Movie
-import com.example.startandroidacademy.network.ActorResponse
-import com.example.startandroidacademy.network.GenresResponse
-import com.example.startandroidacademy.network.MoviesApi
-import com.example.startandroidacademy.network.MoviesResponse
+import com.example.startandroidacademy.network.*
+import retrofit2.Response
 
 
-class Repository(private val moviesApi: MoviesApi) {
+class Repository(private val moviesApi: MoviesApi):SafeApiRequest() {
 
-    private suspend fun loadGenres() = moviesApi.getGenres()
+    private suspend fun loadGenres() = apiRequest {moviesApi.getGenres()}
 
-    private suspend fun loadPopularMovies(page: Int) = moviesApi.getPopularMovies(page)
+    private suspend fun loadPopularMovies(page: Int) =apiRequest{moviesApi.getPopularMovies(page)}
 
-    private suspend fun loadActors(movieID: Int) = moviesApi.getMovieActors(movieID)
+    private suspend fun loadActors(movieID: Int) = apiRequest{moviesApi.getMovieActors(movieID)}
 
 
     private suspend fun loadGenre(): List<Genre> {
@@ -23,14 +21,13 @@ class Repository(private val moviesApi: MoviesApi) {
         return parseGenresListResponse(data)
     }
 
-    private suspend fun loadActor(movieID: Int): List<Actor> {
+     suspend fun loadActor(movieID: Int): List<Actor> {
         val data = loadActors(movieID)
         return parseActorsListResponse(data)
     }
 
     suspend fun loadMovies(page: Int): List<Movie> {
         val genresMap = loadGenre()
-        //val actorsMap = loadActor()
 
         val data = loadPopularMovies(page)
         return mapMovies(data, genresMap)
@@ -53,7 +50,6 @@ class Repository(private val moviesApi: MoviesApi) {
                 backdrop = jsonMovie.backdropPicture,
                 voteAverage = jsonMovie.voteAverage,
                 adult = if (jsonMovie.adult) 16 else 13,
-                releaseDate = jsonMovie.releaseDate,
                 voteCount = jsonMovie.votesCount,
                 genres = jsonMovie.genreIds.map {
                     genresMap[it] ?: throw IllegalArgumentException("Genre not found")

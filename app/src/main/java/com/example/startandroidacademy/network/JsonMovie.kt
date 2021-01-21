@@ -23,6 +23,4 @@ data class JsonMovie(
     val overview: String,
     @SerialName("adult")
     val adult: Boolean,
-    @SerialName("release_date")
-    val releaseDate: Int
 )
