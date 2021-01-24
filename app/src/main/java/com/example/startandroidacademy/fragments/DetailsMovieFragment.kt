@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.bumptech.glide.Glide
 import com.example.startandroidacademy.R
 import com.example.startandroidacademy.adapters.ActorAdapter
@@ -58,17 +60,20 @@ class DetailsMovieFragment : Fragment() {
         val ivBackground: ImageView = view.findViewById(R.id.iv_background)
         val tag: TextView = view.findViewById(R.id.tv_tag)
         val overview: TextView = view.findViewById(R.id.tv_storyline)
-
+        val ratingBar: RatingBar = view.findViewById(R.id.rating_bar)
+        val reviews: TextView = view.findViewById(R.id.tv_review)
         val movie = requireArguments().getSerializable(MOVIE_KEY) as Movie
 
         recyclerView?.adapter = adapter
         movie.run {
-            Glide.with(view.context).load(movie.poster).into(ivBackground)
+           ivBackground.load(movie.backdrop)
+            ratingBar.rating = movie.voteAverage
             tvName.text = movie.title
             tag.text = movie.genres.joinToString(
                 separator = ", ",
                 transform = { genreItem -> genreItem.name })
             overview.text = movie.overview
+            reviews.text = movie.voteCount.toString()
 
         }
 
