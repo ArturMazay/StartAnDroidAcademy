@@ -78,7 +78,7 @@ class DetailsMovieFragment : Fragment() {
         }
 
         viewModel.actors.observe(viewLifecycleOwner, {
-            adapter.listActor = it
+            adapter.submitList(it)
             adapter.notifyDataSetChanged()
         })
     }

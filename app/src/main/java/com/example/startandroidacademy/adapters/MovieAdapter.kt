@@ -3,7 +3,6 @@ package com.example.startandroidacademy.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.example.startandroidacademy.R
 import com.example.startandroidacademy.`interface`.OnClickListenerToMovieDetails
 import com.example.startandroidacademy.data.Movie
@@ -11,8 +10,7 @@ import com.example.startandroidacademy.utils.DiffCallback
 
 class MovieAdapter(
     private val onClickListenerToMovieDetails: OnClickListenerToMovieDetails?
-) :ListAdapter<Movie,MovieViewHolder>(DiffCallback()) {
-
+) : ListAdapter<Movie, MovieViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder =
         MovieViewHolder(
@@ -21,7 +19,7 @@ class MovieAdapter(
         )
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-       val movie = getItem(position)
+        val movie = getItem(position)
         holder.bindMovie(movie)
         holder.itemView.setOnClickListener {
             onClickListenerToMovieDetails?.onClickOpenDetailsMovieFragment(movie)
