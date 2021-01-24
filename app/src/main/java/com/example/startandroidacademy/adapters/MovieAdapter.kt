@@ -2,14 +2,16 @@ package com.example.startandroidacademy.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.startandroidacademy.R
 import com.example.startandroidacademy.`interface`.OnClickListenerToMovieDetails
 import com.example.startandroidacademy.data.Movie
+import com.example.startandroidacademy.utils.DiffCallback
 
-class MovieAdapter(var listMovie:List<Movie> = listOf(),
+class MovieAdapter(
     private val onClickListenerToMovieDetails: OnClickListenerToMovieDetails?
-) : RecyclerView.Adapter<MovieViewHolder>() {
+) :ListAdapter<Movie,MovieViewHolder>(DiffCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder =
@@ -19,13 +21,10 @@ class MovieAdapter(var listMovie:List<Movie> = listOf(),
         )
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bindMovie(listMovie[position])
-
+       val movie = getItem(position)
+        holder.bindMovie(movie)
         holder.itemView.setOnClickListener {
-            val movie = listMovie[position]
             onClickListenerToMovieDetails?.onClickOpenDetailsMovieFragment(movie)
         }
     }
-
-    override fun getItemCount(): Int = listMovie.size
 }

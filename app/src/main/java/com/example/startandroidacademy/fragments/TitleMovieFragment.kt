@@ -59,7 +59,7 @@ class TitleMovieFragment : Fragment() {
 
         viewModel.movies.observe(viewLifecycleOwner, Observer {
             it.let {
-                adapter.listMovie = it
+                adapter.submitList(it)
                 adapter.notifyDataSetChanged()
             }
         })
