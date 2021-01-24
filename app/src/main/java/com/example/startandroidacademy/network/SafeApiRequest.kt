@@ -9,7 +9,7 @@ abstract class SafeApiRequest {
         val response = call.invoke()
 
         if (response.isSuccessful) {
-            return response.body()!!   ///вот если тут удачното парсим?
+            return response.body()!!
         } else {
             val error = response.errorBody()?.toString()
             val message = StringBuilder()

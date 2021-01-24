@@ -1,8 +1,10 @@
-package com.example.startandroidacademy
+package com.example.startandroidacademy.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.startandroidacademy.R
+import com.example.startandroidacademy.`interface`.OnClickListenerToMovieDetails
 import com.example.startandroidacademy.data.Movie
 
 class MovieAdapter(var listMovie:List<Movie> = listOf(),

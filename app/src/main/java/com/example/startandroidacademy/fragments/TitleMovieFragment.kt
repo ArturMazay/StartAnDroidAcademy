@@ -1,4 +1,4 @@
-package com.example.startandroidacademy
+package com.example.startandroidacademy.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -9,8 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.example.startandroidacademy.R
+import com.example.startandroidacademy.`interface`.OnClickListenerToMovieDetails
+import com.example.startandroidacademy.adapters.MovieAdapter
 import com.example.startandroidacademy.data.Movie
 import com.example.startandroidacademy.network.MoviesApi
+import com.example.startandroidacademy.repository.Repository
+import com.example.startandroidacademy.viewmodels.MoviesViewModelFactory
+import com.example.startandroidacademy.viewmodels.TitleViewModel
 import kotlinx.serialization.ExperimentalSerializationApi
 
 
@@ -29,7 +35,7 @@ class TitleMovieFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_title_movie, container, false)
 
         val api = MoviesApi()
-        val repo =Repository(api)
+        val repo = Repository(api)
         factory = MoviesViewModelFactory(repo)
         return view
     }
@@ -37,7 +43,7 @@ class TitleMovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this,factory).get(TitleViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory).get(TitleViewModel::class.java)
 
         adapter = MovieAdapter(
             onClickListenerToMovieDetails = object

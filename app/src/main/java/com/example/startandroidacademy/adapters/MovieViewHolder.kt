@@ -1,11 +1,12 @@
-package com.example.startandroidacademy
+package com.example.startandroidacademy.adapters
 
 import android.view.View
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import coil.load
+import com.example.startandroidacademy.R
 import com.example.startandroidacademy.data.Movie
 
 class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -19,7 +20,7 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val ratingBar: RatingBar = itemView.findViewById(R.id.rating)
 
     fun bindMovie(movie: Movie) {
-        Glide.with(itemView.context).load(movie.backdrop).into(poster)
+        poster.load(movie.backdrop)
         tvName.text = movie.title
         ratingBar.rating = movie.voteAverage
         val ageText = "${movie.adult} +"

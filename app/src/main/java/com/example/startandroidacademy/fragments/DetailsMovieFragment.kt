@@ -1,4 +1,4 @@
-package com.example.startandroidacademy
+package com.example.startandroidacademy.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,23 +8,45 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.startandroidacademy.R
+import com.example.startandroidacademy.adapters.ActorAdapter
 import com.example.startandroidacademy.data.Movie
+import com.example.startandroidacademy.network.MoviesApi
+import com.example.startandroidacademy.repository.Repository
+import com.example.startandroidacademy.viewmodels.DetailsViewModel
+import com.example.startandroidacademy.viewmodels.DetailsViewModelFactory
+import com.example.startandroidacademy.viewmodels.MoviesViewModelFactory
+import com.example.startandroidacademy.viewmodels.TitleViewModel
+import kotlinx.serialization.ExperimentalSerializationApi
 
 class DetailsMovieFragment : Fragment() {
 
     private lateinit var viewModel: DetailsViewModel
     private lateinit var adapter: ActorAdapter
     private val recyclerView: RecyclerView? = view?.findViewById(R.id.list_actor)
+    private lateinit var factory: DetailsViewModelFactory
 
+
+    @ExperimentalSerializationApi
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_details_movie, container, false)
+    ): View {
+      val view = inflater.inflate(R.layout.fragment_details_movie, container, false)
 
+        val api = MoviesApi()
+        val repo = Repository(api)
+        factory = DetailsViewModelFactory(repo,arguments?.getInt(PARAM_MOVIE_ID, 0) ?: 0)
+
+        return view
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this, factory).get(DetailsViewModel::class.java)
+
 
 
         val viewBack: Button = view.findViewById(R.id.button_back)
@@ -57,12 +79,14 @@ class DetailsMovieFragment : Fragment() {
     }
 
     companion object {
-        const val MOVIE_KEY = "keymovie"
+        const val MOVIE_KEY = "key_movie"
+        const val PARAM_MOVIE_ID = "movie_id"
 
         @JvmStatic
         fun newInstance(movie: Movie) = DetailsMovieFragment().apply {
             arguments = Bundle().apply {
                 putSerializable(MOVIE_KEY, movie)
+                putSerializable(PARAM_MOVIE_ID, movie.id)
             }
         }
     }

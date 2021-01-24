@@ -1,8 +1,9 @@
-package com.example.startandroidacademy
+package com.example.startandroidacademy.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.startandroidacademy.R
 import com.example.startandroidacademy.data.Actor
 
 class ActorAdapter(var listActor: List<Actor> = listOf()) :

@@ -1,8 +1,9 @@
-package com.example.startandroidacademy
+package com.example.startandroidacademy.viewmodels
 
-import android.content.Context
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.startandroidacademy.repository.Repository
 
 @Suppress("UNCHECKED_CAST")
 class MoviesViewModelFactory(
