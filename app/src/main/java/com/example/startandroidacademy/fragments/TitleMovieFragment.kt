@@ -76,10 +76,6 @@ class TitleMovieFragment : Fragment() {
         onClickListenerToMovieDetails = null
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-    }
-
     companion object {
         @JvmStatic
         fun newInstance() = TitleMovieFragment()

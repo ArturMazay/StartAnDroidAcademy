@@ -1,36 +1,37 @@
 package com.example.startandroidacademy.viewmodels
 
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.startandroidacademy.data.Movie
 import com.example.startandroidacademy.repository.Repository
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.launch
+import com.example.startandroidacademy.utils.Coroutines
+import kotlinx.coroutines.Job
 
 
 class TitleViewModel(private val repository: Repository) : ViewModel() {
 
-    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        Log.e("TAG", "Coroutine exception, scope active", throwable)
-    }
+    private lateinit var job: Job
 
     private val _movies = MutableLiveData<List<Movie>>()
     val movies: LiveData<List<Movie>>
         get() = _movies
 
-    private fun getMovies() {
-        viewModelScope.launch(exceptionHandler) {
-            _movies.value =
-                repository.loadMovies(page = 1)
 
-        }
+    private fun getMovies() {
+        job = Coroutines.ioToMain(
+            { repository.loadMovies(page = 1) },
+            { _movies.value = it }
+        )
     }
 
-   init {
+    override fun onCleared() {
+        super.onCleared()
+        if (::job.isInitialized) job.cancel()
+    }
+
+    init {
         getMovies()
     }
 }
