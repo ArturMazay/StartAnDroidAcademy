@@ -1,4 +1,4 @@
-package com.example.startandroidacademy
+package com.example.startandroidacademy.`interface`
 
 import com.example.startandroidacademy.data.Movie
 

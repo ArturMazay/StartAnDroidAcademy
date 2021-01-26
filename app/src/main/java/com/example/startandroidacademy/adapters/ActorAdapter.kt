@@ -1,12 +1,14 @@
-package com.example.startandroidacademy
+package com.example.startandroidacademy.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ListAdapter
+import com.example.startandroidacademy.R
 import com.example.startandroidacademy.data.Actor
+import com.example.startandroidacademy.utils.DiffCallback
+import com.example.startandroidacademy.utils.DiffCallbackActor
 
-class ActorAdapter(private val listActor: List<Actor> = listOf()) :
-    RecyclerView.Adapter<ActorViewHolder>() {
+class ActorAdapter() : ListAdapter <Actor, ActorViewHolder>(DiffCallbackActor()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorViewHolder =
         ActorViewHolder(
@@ -15,9 +17,7 @@ class ActorAdapter(private val listActor: List<Actor> = listOf()) :
         )
 
     override fun onBindViewHolder(holder: ActorViewHolder, position: Int) {
-        holder.bind(listActor[position])
+        val actor = getItem(position)
+        holder.bind(actor)
     }
-
-    override fun getItemCount(): Int = listActor.size
-
 }

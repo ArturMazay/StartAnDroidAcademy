@@ -1,10 +1,11 @@
-package com.example.startandroidacademy
+package com.example.startandroidacademy.adapters
 
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import coil.load
+import com.example.startandroidacademy.R
 
 import com.example.startandroidacademy.data.Actor
 
@@ -14,8 +15,7 @@ class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val actorNameTextView: TextView = itemView.findViewById(R.id.name_actor)
 
     fun bind(actor: Actor) {
-        Glide.with(itemView.context).load(actor.picture).into(actorImageImageView)
+        actorImageImageView.load(actor.picture)
         actorNameTextView.text = actor.name
     }
-
 }

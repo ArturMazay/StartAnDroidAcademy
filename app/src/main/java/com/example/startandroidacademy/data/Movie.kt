@@ -8,10 +8,8 @@ data class Movie(
     val overview: String?,
     val poster: String?,
     val backdrop: String?,
-    val ratings: Float,
-    val numberOfRatings: Int,
-    val minimumAge: Int,
-    val runtime: Int,
-    val genres: List<Genre>,
-    val actors: List<Actor>
+    val voteAverage: Float, // звезды
+    val voteCount: Int, //голоса кол во
+    val adult: Int,
+    val genres: List<Genre>
 ) : Serializable
