@@ -12,8 +12,8 @@ object Coroutines {
 
     fun <T : Any> ioToMain(work: suspend (() -> T?), callback: ((T?) -> Unit)) =
         CoroutineScope(Dispatchers.Main).launch(exceptionHandler) {
-            val data = CoroutineScope(Dispatchers.IO).async rt@{
-                return@rt work()
+            val data = CoroutineScope(Dispatchers.IO).async{
+                return@async work()
             }.await()
             callback(data)
         }

@@ -10,7 +10,7 @@ import com.example.startandroidacademy.repository.Repository
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 
-class DetailsViewModel(private val repository: Repository,movieID: Int):ViewModel() {
+class DetailsViewModel(private val repository: Repository, movieID: Int) : ViewModel() {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         Log.e("TAGY", "Coroutine exception, scope active", throwable)
@@ -20,12 +20,13 @@ class DetailsViewModel(private val repository: Repository,movieID: Int):ViewMode
     val actors: LiveData<List<Actor>>
         get() = _actors
 
-    private fun loadActors(movieID:Int) {
-        viewModelScope.launch (exceptionHandler) {
+    private fun loadActors(movieID: Int) {
+        viewModelScope.launch(exceptionHandler) {
             _actors.value =
                 repository.loadActor(movieID)
         }
     }
+
     init {
         loadActors(movieID)
     }
