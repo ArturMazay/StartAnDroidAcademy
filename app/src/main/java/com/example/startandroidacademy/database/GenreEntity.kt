@@ -2,17 +2,9 @@ package com.example.startandroidacademy.database
 
 import androidx.room.*
 
-@Entity(
-    tableName = "genre",
-    foreignKeys = [ForeignKey(
-        entity = MovieEntity::class,
-        parentColumns = ["genre_id"],
-        childColumns = ["movie_id"],
-        onDelete = ForeignKey.CASCADE
-    )], indices = [Index(value = ["movie_id"])]
-)
+@Entity(tableName = "genre")
 class GenreEntity(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "genre_id")
     val genre_id: Long,
     @ColumnInfo(name = "movie_id")

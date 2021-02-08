@@ -1,14 +1,12 @@
 package com.example.startandroidacademy.database
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 @Entity(tableName = "movie")
 data class MovieEntity(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "movie_id")
-    val movie_id: Int,
+    val movie_id: Long,
     @ColumnInfo(name = "title")
     val title: String?,
     @ColumnInfo(name = "overview")
@@ -22,7 +20,17 @@ data class MovieEntity(
     @ColumnInfo(name = "vote_count")
     val voteCount: Int,
     @ColumnInfo(name = "adult")
-    val adult: Int,
-    @ColumnInfo(name = "genres_id")
-    val genres_id: List<Int>
+    val adult: Int
+)
+
+@Entity(primaryKeys = ["movie_id","genre_id"])
+data class MovieWithGenres(
+    val movie_id: Long,
+    val genre_id: Long,
+)
+
+@Entity(primaryKeys = ["movie_id","actor_id"])
+data class MovieWithActors(
+    val movie_id: Long,
+    val actor_id: Long,
 )

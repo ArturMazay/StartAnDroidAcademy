@@ -1,18 +1,14 @@
 package com.example.startandroidacademy.database
 
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = "actor",
-    foreignKeys = [ForeignKey(
-        entity = MovieEntity::class,
-        parentColumns = ["actor_id"],
-        childColumns = ["movie_id"],
-        onDelete = ForeignKey.CASCADE
-    )], indices = [Index(value = ["movie_id"])]
+    tableName = "actor"
 )
 data class ActorEntity(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "actor_id")
     val actor_id: Int,
     @ColumnInfo(name = "name")
