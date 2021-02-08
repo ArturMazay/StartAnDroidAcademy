@@ -8,6 +8,8 @@ import com.example.startandroidacademy.network.*
 
 class Repository(private val moviesApi: MoviesApi) : SafeApiRequest() {
 
+
+
     private suspend fun loadGenres() = apiRequest { moviesApi.getGenres() }
 
     private suspend fun loadPopularMovies(page: Int) =

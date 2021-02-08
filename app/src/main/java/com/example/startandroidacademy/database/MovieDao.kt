@@ -7,11 +7,11 @@ interface MovieDao {
 
     @Transaction
     @Query("SELECT * FROM movie WHERE movie_id=:movieId")
-    suspend fun getMovieWithGenresAndActors(movieId: Long): List<MovieWithActorsAndGenres>
+    suspend fun getMovieWithGenresAndActors(movieId: Long): MovieWithActorsAndGenres
 
     @Transaction
-    @Query("SELECT * FROM movie WHERE movie_id=:movieId")
-    suspend fun getMoviesWithGenres(movieId: Long): List<MovieWithGenres>
+    @Query("SELECT * FROM movie")
+    suspend fun getMoviesWithGenres(): List<MovieWithGenres>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGenres(genres: List<GenreEntity>)

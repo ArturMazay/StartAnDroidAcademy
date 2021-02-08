@@ -43,7 +43,7 @@ data class MovieWithActorsAndGenres(
     val actors: List<ActorEntity>,
     @Relation(
         parentColumn = "movie_id",
-        entityColumn = "actor_id",
+        entityColumn = "genre_id",
         associateBy = Junction(MovieWithGenres::class)
     )
     val genres: List<GenreEntity>
