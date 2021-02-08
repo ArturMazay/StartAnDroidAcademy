@@ -5,20 +5,25 @@ import androidx.room.*
 @Dao
 interface MovieDao {
 
-    @Query(SELECT * FROM movie WHERE movie_id = :movie_id)
-    fun getMovieId():List<MovieEntity>
+    @Transaction
+    @Query("SELECT * FROM movie")
+   suspend fun getMovieListWithGenre(): List<MovieListWithGenres>
+
+    @Transaction
+    @Query("SELECT * FROM movie")
+   suspend fun gentMovieListWithActors(): List<MovieListWithActors>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(movieEntity: List<MovieEntity>)
+   suspend fun insertAll(movieEntity: List<MovieEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(movieEntity:MovieEntity)
+   suspend fun insert(movieEntity:MovieEntity)
 
     @Update
-    fun update(movieEntity:MovieEntity)
+   suspend fun update(movieEntity:MovieEntity)
 
     @Delete
-    fun deleteAll()
+   suspend fun deleteAll()
 
 
 }
