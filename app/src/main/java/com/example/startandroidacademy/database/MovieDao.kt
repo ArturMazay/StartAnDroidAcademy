@@ -9,6 +9,10 @@ interface MovieDao {
     @Query("SELECT * FROM movie WHERE movie_id=:movieId")
     suspend fun getMovieWithGenresAndActors(movieId: Long): List<MovieWithActorsAndGenres>
 
+    @Transaction
+    @Query("SELECT * FROM movie WHERE movie_id=:movieId")
+    suspend fun getMoviesWithGenres(movieId: Long): List<MovieWithGenres>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGenres(genres: List<GenreEntity>)
 
@@ -24,8 +28,7 @@ interface MovieDao {
     @Update
     suspend fun update(movieEntity: MovieEntity)
 
-    @Delete
-    suspend fun deleteAll()
-
+    @Query("DELETE FROM movie")
+    fun deleteAll()
 
 }
