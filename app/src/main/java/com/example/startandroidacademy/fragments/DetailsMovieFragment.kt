@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.bumptech.glide.Glide
 import com.example.startandroidacademy.R
 import com.example.startandroidacademy.adapters.ActorAdapter
 import com.example.startandroidacademy.data.Movie
