@@ -4,6 +4,7 @@ import com.example.startandroidacademy.data.Actor
 import com.example.startandroidacademy.data.Genre
 import com.example.startandroidacademy.data.Movie
 import com.example.startandroidacademy.database.MovieDataBase
+import com.example.startandroidacademy.database.MovieWithGenres
 import com.example.startandroidacademy.network.*
 
 
@@ -11,10 +12,11 @@ class Repository(private val moviesApi: MoviesApi, private val dataBase: MovieDa
     SafeApiRequest() {
 
 
-    private suspend fun loadMovieAdnGenreFromBd() = dataBase.movieDao.getMoviesWithGenres()
+     suspend fun loadMovieAdnGenreFromBd() = dataBase.movieDao.getMoviesWithGenres()
 
-    private suspend fun loadMovieGenreAndActorFromBd(movieID: Long) =
-        dataBase.movieDao.getMovieWithGenresAndActors(movieID)
+
+     suspend fun loadMovieGenreAndActorFromBd(movieID: Long) = dataBase.movieDao.getMovieWithGenresAndActors(movieID)
+
 
 
     private suspend fun loadGenres() = apiRequest { moviesApi.getGenres() }

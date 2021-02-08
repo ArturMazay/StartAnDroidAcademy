@@ -10,6 +10,6 @@ class GenreEntity(
     @ColumnInfo(name = "movie_id")
     val movie_id: Long,
     @ColumnInfo(name = "name_genres")
-    val name_genres: Int
+    val name_genres: String
 ) {
 }
