@@ -3,11 +3,18 @@ package com.example.startandroidacademy.repository
 import com.example.startandroidacademy.data.Actor
 import com.example.startandroidacademy.data.Genre
 import com.example.startandroidacademy.data.Movie
+import com.example.startandroidacademy.database.MovieDataBase
 import com.example.startandroidacademy.network.*
 
 
-class Repository(private val moviesApi: MoviesApi) : SafeApiRequest() {
+class Repository(private val moviesApi: MoviesApi, private val dataBase: MovieDataBase) :
+    SafeApiRequest() {
 
+
+    private suspend fun loadMovieAdnGenreFromBd() = dataBase.movieDao.getMoviesWithGenres()
+
+    private suspend fun loadMovieGenreAndActorFromBd(movieID: Long) =
+        dataBase.movieDao.getMovieWithGenresAndActors(movieID)
 
 
     private suspend fun loadGenres() = apiRequest { moviesApi.getGenres() }
@@ -15,7 +22,8 @@ class Repository(private val moviesApi: MoviesApi) : SafeApiRequest() {
     private suspend fun loadPopularMovies(page: Int) =
         apiRequest { moviesApi.getPopularMovies(page) }
 
-    private suspend fun loadActors(movieID: Int) = apiRequest { moviesApi.getMovieActors(movieID) }
+    private suspend fun loadActors(movieID: Int) =
+        apiRequest { moviesApi.getMovieActors(movieID) }
 
     private suspend fun loadGenre(): List<Genre> {
         val data = loadGenres()
@@ -47,8 +55,8 @@ class Repository(private val moviesApi: MoviesApi) : SafeApiRequest() {
                 id = jsonMovie.id,
                 title = jsonMovie.title,
                 overview = jsonMovie.overview,
-                poster = getPosterUrl(jsonMovie.posterPicture),
-                backdrop = getBackdropUrl(jsonMovie.backdropPicture),
+                poster = getPosterUrl(jsonMovie.backdropPicture),
+                backdrop = getBackdropUrl(jsonMovie.posterPicture),
                 voteAverage = jsonMovie.voteAverage,
                 adult = if (jsonMovie.adult) 16 else 13,
                 voteCount = jsonMovie.votesCount,
@@ -58,6 +66,7 @@ class Repository(private val moviesApi: MoviesApi) : SafeApiRequest() {
             )
         }
     }
+
 
     private fun parseGenresListResponse(
         genresResponse: GenresResponse
@@ -99,3 +108,5 @@ class Repository(private val moviesApi: MoviesApi) : SafeApiRequest() {
         fun getActorPictureUrl(image: String?) = getImageUrl(image, profilePreferWidth)
     }
 }
+
+

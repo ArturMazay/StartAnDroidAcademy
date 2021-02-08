@@ -23,15 +23,6 @@ data class MovieEntity(
     val adult: Int
 )
 
-data class MovieListWithGenres(
-    @Embedded val movieEntity: MovieEntity,
-    @Relation(
-        parentColumn = "movie_id",
-        entityColumn = "genre_id",
-        associateBy = Junction(MovieWithGenres::class)
-    )
-    val genres: List<GenreEntity>
-)
 
 data class MovieWithActorsAndGenres(
     @Embedded val movieEntity: MovieEntity,
