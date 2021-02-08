@@ -6,12 +6,8 @@ import androidx.room.*
 interface MovieDao {
 
     @Transaction
-    @Query("SELECT * FROM movie")
-    suspend fun getMovieWithGenre(): List<MovieListWithGenres>
-
-    @Transaction
-    @Query("SELECT * FROM movie")
-    suspend fun gentMovieWithActors(): List<MovieListWithActors>
+    @Query("SELECT * FROM movie WHERE movie_id=:movieId")
+    suspend fun getMovieWithGenresAndActors(movieId: Long): List<MovieWithActorsAndGenres>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGenres(genres: List<GenreEntity>)
@@ -20,10 +16,10 @@ interface MovieDao {
     suspend fun insertActors(actors: List<ActorEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(movieEntity: List<MovieEntity>)
+    suspend fun insertAllMovie(movieEntity: List<MovieEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(movieEntity: MovieEntity)
+    suspend fun insertMovie(movieEntity: MovieEntity)
 
     @Update
     suspend fun update(movieEntity: MovieEntity)
