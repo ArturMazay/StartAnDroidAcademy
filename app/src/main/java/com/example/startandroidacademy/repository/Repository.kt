@@ -1,12 +1,54 @@
 package com.example.startandroidacademy.repository
 
+import android.app.Application
 import com.example.startandroidacademy.data.Actor
 import com.example.startandroidacademy.data.Genre
 import com.example.startandroidacademy.data.Movie
+import com.example.startandroidacademy.database.MovieDatabase
+import com.example.startandroidacademy.database.MovieWithGenres
+import com.example.startandroidacademy.database.MovieWithGenresAndActors
 import com.example.startandroidacademy.network.*
 
 
-class Repository(private val moviesApi: MoviesApi) : SafeApiRequest() {
+class Repository(private val moviesApi: MoviesApi, application: Application) : SafeApiRequest() {
+
+    private val db = MovieDatabase.create(application).movieDao
+
+    suspend fun loadActorGenresFromBa(movieID: Int): List<Actor> {
+        val data = db.getMovieWithGenresAndActors(movieID.toLong())
+        return mapActor(data)
+    }
+    private fun mapActor(
+        actor: MovieWithGenresAndActors
+    ): List<Actor> {
+
+        return actor.actors.map {
+            Actor(
+                id=it.actorId,
+                name = it.name,
+                picture = it.picture
+            )
+        }
+    }
+
+
+
+    private suspend fun loadGenreFromBd(): List<Genre> {
+        val data = db.getMoviesWithGenres()
+        return mapGenre(data)
+    }
+
+    private fun mapGenre(
+        genres: MovieWithGenres
+    ): List<Genre> {
+        return genres.genres.map {
+            Genre(
+                id = it.genreId.toInt(),
+                name = it.name
+            )
+        }
+    }
+
 
     private suspend fun loadGenres() = apiRequest { moviesApi.getGenres() }
 
@@ -45,8 +87,8 @@ class Repository(private val moviesApi: MoviesApi) : SafeApiRequest() {
                 id = jsonMovie.id,
                 title = jsonMovie.title,
                 overview = jsonMovie.overview,
-                poster = getPosterUrl(jsonMovie.posterPicture),
-                backdrop = getBackdropUrl(jsonMovie.backdropPicture),
+                poster = getPosterUrl(jsonMovie.backdropPicture),
+                backdrop = getBackdropUrl(jsonMovie.posterPicture),
                 voteAverage = jsonMovie.voteAverage,
                 adult = if (jsonMovie.adult) 16 else 13,
                 voteCount = jsonMovie.votesCount,

@@ -1,32 +1,49 @@
 package com.example.startandroidacademy.database
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Index
-import androidx.room.PrimaryKey
+import androidx.room.*
 
-@Entity(
-    tableName = FilmContract.Movies.TABLE_NAME,
-    indices = [Index(FilmContract.Movies.COLUMN_NAME_ID)] //
-)
+@Entity(tableName = "movie")
 data class MovieEntity(
-    @PrimaryKey()
-    @ColumnInfo(name = FilmContract.Movies.COLUMN_NAME_ID)
-    val id: Int,
-    @ColumnInfo(name = FilmContract.Movies.COLUMN_NAME_TITLE)
-    val title: String,
-    @ColumnInfo(name = FilmContract.Movies.COLUMN_NAME_OVERVIEW)
-    val overview: String,
-    @ColumnInfo(name = FilmContract.Movies.COLUMN_NAME_VOTE_AVERAGE)
+    @PrimaryKey
+    @ColumnInfo(name = "id")
+    val id: Long,
+    @ColumnInfo(name = "title")
+    val title: String?,
+    @ColumnInfo(name = "overview")
+    val overview: String?,
+    @ColumnInfo(name = "poster")
+    val poster: String?,
+    @ColumnInfo(name = "backdrop")
+    val backdrop: String?,
+    @ColumnInfo(name = "vote_average")
     val voteAverage: Float,
-    @ColumnInfo(name = FilmContract.Movies.COLUMN_NAME_VOTE_COUNT)
+    @ColumnInfo(name = "vote_count")
     val voteCount: Int,
-    @ColumnInfo(name = FilmContract.Movies.COLUMN_NAME_POSTER_URL)
-    val posterUrl: String,
-    @ColumnInfo(name = FilmContract.Movies.COLUMN_NAME_BACKDROP_URL)
-    val backdropUrl: String,
-    @ColumnInfo(name = FilmContract.Movies.COLUMN_NAME_GENRES_NAMES)
-    val genresNames: List<String>,
-    @ColumnInfo(name = FilmContract.Movies.COLUMN_NAME_ACTORS)
-    var actors: List<String>
+    @ColumnInfo(name = "adult")
+    val adult: Int
+)
+
+data class MovieWithGenres(
+    @Embedded
+    val movie: MovieEntity,
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "movie_id"
+    )
+    val genres: List<GenreEntity>
+)
+
+data class MovieWithGenresAndActors(
+    @Embedded
+    val movie: MovieEntity,
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "movie_id"
+    )
+    val genres: List<GenreEntity>,
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "movie_id"
+    )
+    val actors: List<ActorEntity>
 )

@@ -3,8 +3,8 @@ package com.example.startandroidacademy.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import com.example.startandroidacademy.OnClickListenerToMovieDetails
 import com.example.startandroidacademy.R
-import com.example.startandroidacademy.`interface`.OnClickListenerToMovieDetails
 import com.example.startandroidacademy.data.Movie
 import com.example.startandroidacademy.utils.DiffCallback
 

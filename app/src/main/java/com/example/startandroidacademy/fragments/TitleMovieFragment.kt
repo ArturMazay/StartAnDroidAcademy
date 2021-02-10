@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.example.startandroidacademy.OnClickListenerToMovieDetails
 import com.example.startandroidacademy.R
-import com.example.startandroidacademy.`interface`.OnClickListenerToMovieDetails
 import com.example.startandroidacademy.adapters.MovieAdapter
 import com.example.startandroidacademy.data.Movie
 import com.example.startandroidacademy.network.MoviesApi
@@ -33,10 +33,10 @@ class TitleMovieFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_title_movie, container, false)
-
+        val application = requireNotNull(this.activity).application
         val api = MoviesApi()
-        val repo = Repository(api)
-        factory = MoviesViewModelFactory(repo)
+        val repo = Repository(api,application)
+        factory = MoviesViewModelFactory(repo,application)
         return view
     }
 

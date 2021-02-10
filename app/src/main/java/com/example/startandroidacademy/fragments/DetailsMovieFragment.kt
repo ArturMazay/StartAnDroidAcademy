@@ -34,9 +34,10 @@ class DetailsMovieFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.fragment_details_movie, container, false)
+        val application = requireNotNull(this.activity).application
 
         val api = MoviesApi()
-        val repo = Repository(api)
+        val repo = Repository(api,application)
         factory = DetailsViewModelFactory(repo, arguments?.getInt(PARAM_MOVIE_ID, 0) ?: 0)
 
         return view

@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.startandroidacademy.R
 import com.example.startandroidacademy.data.Actor
-import com.example.startandroidacademy.utils.DiffCallback
 import com.example.startandroidacademy.utils.DiffCallbackActor
 
 class ActorAdapter() : ListAdapter <Actor, ActorViewHolder>(DiffCallbackActor()) {

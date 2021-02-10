@@ -22,8 +22,7 @@ class DetailsViewModel(private val repository: Repository, movieID: Int) : ViewM
 
     private fun loadActors(movieID: Int) {
         viewModelScope.launch(exceptionHandler) {
-            _actors.value =
-                repository.loadActor(movieID)
+            _actors.value = repository.loadActor(movieID)
         }
     }
 

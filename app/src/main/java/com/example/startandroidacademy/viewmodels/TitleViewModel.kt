@@ -1,16 +1,17 @@
 package com.example.startandroidacademy.viewmodels
 
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.startandroidacademy.data.Movie
 import com.example.startandroidacademy.repository.Repository
 import com.example.startandroidacademy.utils.Coroutines
 import kotlinx.coroutines.Job
 
 
-class TitleViewModel(private val repository: Repository) : ViewModel() {
+class TitleViewModel(private val repository: Repository,application: Application) : AndroidViewModel(application) {
 
     private lateinit var job: Job
 
