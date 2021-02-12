@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.startandroidacademy.data.Actor
 import com.example.startandroidacademy.data.Genre
 import com.example.startandroidacademy.data.Movie
+import com.example.startandroidacademy.database.GenreEntity
 import com.example.startandroidacademy.database.MovieDatabase
 import com.example.startandroidacademy.database.MovieWithGenres
 import com.example.startandroidacademy.database.MovieWithGenresAndActors
@@ -14,17 +15,45 @@ class Repository(private val moviesApi: MoviesApi, application: Application) : S
 
     private val db = MovieDatabase.create(application).movieDao
 
-     fun loadActorGenresFromBa(movieID: Int): List<Actor> {
+
+
+
+    private fun mapMovieGenresBd(movieWithGenres: List<MovieWithGenres>,genres: List<GenreEntity>): List<Movie> {
+
+        return movieWithGenres.map {
+            Movie(id=it.movie.id.toInt(),
+                title=it.movie.title,
+                overview = it.movie.overview,
+                backdrop = it.movie.backdrop,
+                poster = it.movie.poster,
+                adult = it.movie.adult,
+                voteAverage = it.movie.voteAverage,
+                voteCount = it.movie.voteCount,
+                genres = genres.map { genreEntity ->
+                    Genre(
+                        id = genreEntity.genreId.toInt(),
+                        name = genreEntity.name
+                    )
+                }
+
+            )
+        }
+    }
+
+
+
+    fun loadActorGenresFromBa(movieID: Int): List<Actor> {
         val data = db.getMovieWithGenresAndActors(movieID.toLong())
         return mapActor(data)
     }
+
     private fun mapActor(
         actor: MovieWithGenresAndActors
     ): List<Actor> {
 
         return actor.actors.map {
             Actor(
-                id=it.actorId,
+                id = it.actorId,
                 name = it.name,
                 picture = it.picture
             )
@@ -32,8 +61,7 @@ class Repository(private val moviesApi: MoviesApi, application: Application) : S
     }
 
 
-
-    private suspend fun loadGenreFromBd(): List<Genre> {
+    private fun loadGenreFromBd(): List<Genre> {
         val data = db.getMoviesWithGenres()
         return mapGenre(data)
     }
