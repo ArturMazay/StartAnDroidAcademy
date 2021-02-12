@@ -26,7 +26,7 @@ interface MovieDao {
 
     @Transaction
     @Query("SELECT * FROM movie")
-    fun getMoviesWithGenres(): MovieWithGenres
+    fun getMoviesWithGenres(): List<MovieWithGenres>
 
     @Transaction
     @Query("SELECT * FROM movie WHERE id = :movieId")

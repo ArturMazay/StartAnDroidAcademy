@@ -1,6 +1,7 @@
 package com.example.startandroidacademy.database
 
 import androidx.room.*
+import com.example.startandroidacademy.data.Movie
 
 @Entity(tableName = "movie")
 data class MovieEntity(

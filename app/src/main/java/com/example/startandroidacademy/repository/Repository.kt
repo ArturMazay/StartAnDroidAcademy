@@ -4,10 +4,7 @@ import android.app.Application
 import com.example.startandroidacademy.data.Actor
 import com.example.startandroidacademy.data.Genre
 import com.example.startandroidacademy.data.Movie
-import com.example.startandroidacademy.database.GenreEntity
-import com.example.startandroidacademy.database.MovieDatabase
-import com.example.startandroidacademy.database.MovieWithGenres
-import com.example.startandroidacademy.database.MovieWithGenresAndActors
+import com.example.startandroidacademy.database.*
 import com.example.startandroidacademy.network.*
 
 
@@ -16,60 +13,28 @@ class Repository(private val moviesApi: MoviesApi, application: Application) : S
     private val db = MovieDatabase.create(application).movieDao
 
 
-
-
-    private fun mapMovieGenresBd(movieWithGenres: List<MovieWithGenres>,genres: List<GenreEntity>): List<Movie> {
-
-        return movieWithGenres.map {
-            Movie(id=it.movie.id.toInt(),
-                title=it.movie.title,
-                overview = it.movie.overview,
-                backdrop = it.movie.backdrop,
-                poster = it.movie.poster,
-                adult = it.movie.adult,
-                voteAverage = it.movie.voteAverage,
-                voteCount = it.movie.voteCount,
-                genres = genres.map { genreEntity ->
-                    Genre(
-                        id = genreEntity.genreId.toInt(),
-                        name = genreEntity.name
-                    )
-                }
-
+    private  fun mapMovie(movieWithGenres: List<MovieWithGenres>): List<Movie> {
+        return movieWithGenres.map { movieWithGenres ->
+            Movie(
+                id = movieWithGenres.movie.id.toInt(),
+                title = movieWithGenres.movie.title,
+                overview = movieWithGenres.movie.overview,
+                poster = movieWithGenres.movie.poster,
+                backdrop = movieWithGenres.movie.backdrop,
+                voteCount = movieWithGenres.movie.voteCount,
+                voteAverage = movieWithGenres.movie.voteAverage,
+                genres = mapGenresEntityToDomain(movieWithGenres.genres),
+                adult = movieWithGenres.movie.adult
             )
         }
     }
 
 
-
-    fun loadActorGenresFromBa(movieID: Int): List<Actor> {
-        val data = db.getMovieWithGenresAndActors(movieID.toLong())
-        return mapActor(data)
-    }
-
-    private fun mapActor(
-        actor: MovieWithGenresAndActors
-    ): List<Actor> {
-
-        return actor.actors.map {
-            Actor(
-                id = it.actorId,
-                name = it.name,
-                picture = it.picture
-            )
-        }
-    }
-
-
-    private fun loadGenreFromBd(): List<Genre> {
-        val data = db.getMoviesWithGenres()
-        return mapGenre(data)
-    }
-
-    private fun mapGenre(
-        genres: MovieWithGenres
+    private fun mapGenresEntityToDomain(
+        genres: List<GenreEntity>
     ): List<Genre> {
-        return genres.genres.map {
+
+        return genres.map {
             Genre(
                 id = it.genreId.toInt(),
                 name = it.name
@@ -77,6 +42,18 @@ class Repository(private val moviesApi: MoviesApi, application: Application) : S
         }
     }
 
+    private fun mapActorEntityToDomain(
+        actors: List<ActorEntity>
+    ): List<Actor> {
+
+        return actors.map {
+            Actor(
+                id = it.actorId.toInt(),
+                name = it.name,
+                picture = it.picture
+            )
+        }
+    }
 
     private suspend fun loadGenres() = apiRequest { moviesApi.getGenres() }
 
@@ -167,3 +144,4 @@ class Repository(private val moviesApi: MoviesApi, application: Application) : S
         fun getActorPictureUrl(image: String?) = getImageUrl(image, profilePreferWidth)
     }
 }
+
