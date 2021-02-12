@@ -18,7 +18,7 @@ interface MovieDao {
     @Insert
     fun insertActors(actors: List<ActorEntity>)
 
-    @Query("DELETE FROM actor WHERE movie_id=:movieId")
+    @Query("DELETE FROM actor WHERE movie_id = :movieId")
     fun deleteActorsByMovie(movieId: Long)
 
     @Query("DELETE FROM movie")
@@ -26,9 +26,9 @@ interface MovieDao {
 
     @Transaction
     @Query("SELECT * FROM movie")
-    fun getMoviesWithGenres(): MovieWithGenres
+    fun getMoviesWithGenres(): List<MovieWithGenres>
 
     @Transaction
-    @Query("SELECT * FROM movie WHERE id=:movieId")
+    @Query("SELECT * FROM movie WHERE id = :movieId")
     fun getMovieWithGenresAndActors(movieId: Long): MovieWithGenresAndActors
 }

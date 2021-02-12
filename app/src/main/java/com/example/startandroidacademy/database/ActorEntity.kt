@@ -13,7 +13,7 @@ import androidx.room.*
         )
     ],
     indices = [
-        Index(value = ["movie_id"]),
+        Index(value = ["movie_id"])
     ]
 )
 data class ActorEntity(

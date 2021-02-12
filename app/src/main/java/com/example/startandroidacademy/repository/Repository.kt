@@ -14,7 +14,7 @@ class Repository(private val moviesApi: MoviesApi, application: Application) : S
 
     private val db = MovieDatabase.create(application).movieDao
 
-    suspend fun loadActorGenresFromBa(movieID: Int): List<Actor> {
+     fun loadActorGenresFromBa(movieID: Int): List<Actor> {
         val data = db.getMovieWithGenresAndActors(movieID.toLong())
         return mapActor(data)
     }
