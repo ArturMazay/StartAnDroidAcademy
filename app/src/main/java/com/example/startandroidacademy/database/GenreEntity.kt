@@ -18,7 +18,6 @@ import androidx.room.*
 )
 data class GenreEntity(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
     val id: Long = 0,
     @ColumnInfo(name = "movie_id")
     val movieId: Long,
